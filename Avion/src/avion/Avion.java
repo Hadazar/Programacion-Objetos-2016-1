@@ -22,11 +22,45 @@ public class Avion {
         boolean[][] sillasEconomicas = new boolean[7][6];
         String[] nombres = new String[50];
         int[] cedulas = new int[50];
-        int[][] puestos = new int[50][2];
+        int[][] puestos = new int[50][3];
         
+        System.out.println("Esquema del avion\n");
+        dibujarAvion(sillasEjecutivas, sillasEconomicas);
+        
+            //Menu de opciones
+        System.out.println("Elija una opción:\n");
+        System.out.println("1. Asignación de sillas a pasajeros.");
+        System.out.println("2. Contar sillas ejecutivas ocupadas.");
+        System.out.println("3. Localizar la silla en la que se encuentra un pasajero.");
+        System.out.println("4. Localizar una silla enconómica disponeble.");
+        System.out.println("5. Asignar un pasajero a una silla economica.");
+        System.out.println("6. Anular una reserva.");
+        System.out.println("7. Contar el numero de puestos disponibles en ventana en la clase económica.");
+        System.out.println("8. Identificar si dos personas tienen nombres iguales.");
+        
+        int opcion = Leer.nextInt();
+        switch(opcion){
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
+            case 8:
+                break;
+            default:
+        }
             //Datos del pasajero
         int posicion = 0;
-        System.out.println("Ingrese sus datos:\n");
+        System.out.println("Ingrese los datos del pasajero:\n");
         System.out.print("Nombre: ");
         nombres[posicion] = Leer.next();
         System.out.println("");
@@ -35,7 +69,7 @@ public class Avion {
         System.out.println("");
         
             //Preferencias del pasajero:
-        System.out.println("Elija sus preferencias:\n");
+        System.out.println("Ingrese las preferencias del psajero:\n");
         System.out.print("Clase: ");
         String clase = Leer.next();
         System.out.println("");
@@ -46,16 +80,21 @@ public class Avion {
             //Asignacion de silla
         if(ubicacion.equals("Ventana") || ubicacion.equals("Pasillo") || ubicacion.equals("Centro")){
             int estaLlena = 0;
+            int[] vectorDatos = new int[3];
             if(clase.equals("Economica")){
-                estaLlena = asignacionDeSillas(sillasEconomicas, clase, ubicacion)[0];
+                vectorDatos = asignacionDeSillas(sillasEconomicas, clase, ubicacion);
+                puestos[posicion][0] = vectorDatos[1];
+                puestos[posicion][1] = vectorDatos[2];
+                puestos[posicion][2] = 0;
             }else if(clase.equals("Ejecutiva")){
-                estaLlena = asignacionDeSillas(sillasEjecutivas, clase, ubicacion)[0];
+                vectorDatos = asignacionDeSillas(sillasEjecutivas, clase, ubicacion);
+                puestos[posicion][0] = vectorDatos[1];
+                puestos[posicion][1] = vectorDatos[2];
+                puestos[posicion][2] = 0;
             }else{System.out.println("Esa clase no existe");}
             if(estaLlena == 1){System.out.println("La silla esta ocupada");}
         }else{System.out.println("Esa ubicacion no existe");}
-        
-        dibujarAvion(sillasEjecutivas, sillasEconomicas);
-        
+      
     }
     
     //Funciones:
