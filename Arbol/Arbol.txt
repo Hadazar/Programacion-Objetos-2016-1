@@ -1,0 +1,18 @@
+Pasos que ejecuta el programa:
+
+- Crea las variables "cuenta_as", "contador" y "blan", y cada una le asigna el valor "1".
+- Crea la variable "num" y le asigna el valor "5".
+- Crea la variable "ast" y le asigna el caracter "*".
+- Crea la variable "esp" y le asigna el caracter " ".
+- Imprime en pantalla el caracter "".
+- Si el valor de la variable "contador" es menor o igual al valor de la variable "num", realiza el siguiente ciclo:
+	- Al el valor de la variable "num" le resta el valor de la variable "contador", el resultado se lo asigna a la variable "blan".
+	- Si el valor de la variable "blan" es mayor a "0", realiza el siguiente ciclo:
+		- Imprime en pantalla a la variable "esp".
+		- Disminuye en una unidad al valor de la variable "blan".
+	- Asigna a la variable "cuenta_as" el valor "1".
+	- Si el valor de la variable "cuenta_as" es menor al doble del valor de la variable "contador", realiza el siguiente ciclo:
+		- Imprime en pantalla a la variable "ast".
+		- Incrementa en una unidad al valor de la variable "cuenta_as".
+	- Incrementa en una unidad al valor de la variable "contador".
+	- Imprime en pantalla el caracter "".

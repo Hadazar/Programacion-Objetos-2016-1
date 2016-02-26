@@ -1,0 +1,13 @@
+Pasos que ejecuta el programa:
+
+- Crea la variable "mayor" y le asigna el valor "0".
+- Imprime en pantalla la frases "Ingrese A","Ingrese B", e "Ingrese C", al tiempo que crea las variables "a","b" y "c"
+ y le solicita al usuario que determine sus valores.
+- Compara los valores de las variables "a" y "b":
+	- Si "a" es mayor a "b", compara los valores de "a" y "c":
+		- Si "a" es mayor a "c", le asigna a la variable "mayor" el valor de "a".
+		- En cualquier otro caso, le asigna a la variable "mayor" el valor de "c".
+	- En cualquier otro caso, compara los valores de "b" y "c":
+		- Si "b" es mayor a "c", le asigna a la variable "mayor" el valor de "b".
+		- En cualquier otro caso, le asigna a la variable "mayor" el valor de "c".
+- Imprime en pantalla la frase "El mayor es" seguido del valor de la viable "mayor".
