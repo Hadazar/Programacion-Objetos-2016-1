@@ -190,4 +190,31 @@ public class Elecciones {
         
         return candidatoMasVotado;
     }
+    
+    public static int[] ordenarNumeros(int[] votosPorCandidato, int numeroCandidatos){
+        
+        int[] listaNumeros = new int[numeroCandidatos];
+        int mayor = 0;
+        for(int j = 0; j < numeroCandidatos; j++){
+            for(int i = 0; i < numeroCandidatos; i++){
+                if(votosPorCandidato[i] > mayor){
+                    listaNumeros[j] = votosPorCandidato[i]; votosPorCandidato[i] = 0;
+                }
+            }
+            mayor = 0;
+        }
+        return listaNumeros;
+    }
+    
+    public static int[] ordenarPosiciones(int[] votosPorCandidato, int[] listaNumeros, int numeroCandidatos){
+        int[] listaPosiciones = new int[numeroCandidatos];
+        for(int j = 0; j < numeroCandidatos; j++){
+            for(int i = 0; i < numeroCandidatos; i++){
+                if(listaNumeros[j] == votosPorCandidato[i]){
+                    listaPosiciones[j] = i;
+                }
+            }
+        }
+        return listaPosiciones;
+    }
 }
