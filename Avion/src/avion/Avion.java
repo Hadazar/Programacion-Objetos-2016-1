@@ -129,13 +129,39 @@ public class Avion {
                 
             case 5:
                 
+                System.out.println("Elija el puesto del pasajero:\n");
+                int[] puesto = new int[2];
+                System.out.print("Fila: ");
+                puesto[0] = Leer.nextInt() + 1;
+                System.out.println("");
+                System.out.print("Columna: ");
+                puesto[1] = Leer.nextInt() + 1;
+                System.out.println("");
+                break;
                 
-                break;
             case 6:
+                System.out.print("Cedula del pasajero: ");
+                int cedula2 = Leer.nextInt();
+                System.out.println("");
+                System.out.print("Cedula del pasajero: ");
+                String clase2 = Leer.next();
+                System.out.println("");
+                
+                if(clase2.equals("Economica")){
+                    anularReserva (cedula2, sillasEconomicas, cedulas, nombres, puestos);
+                }else if(clase2.equals("Ejecutivo")){
+                    anularReserva (cedula2, sillasEjecutivas, cedulas, nombres, puestos);
+                }
                 break;
+                
             case 7:
+                
+                System.out.println("Puestos disponibles: " + numeroDePuestosDisponibles(sillasEconomicas));
                 break;
+                
             case 8:
+                
+                
                 break;
             default:
         }
@@ -270,5 +296,50 @@ public class Avion {
         }
         return sillasDisponibles;
     }
+    
+    public static boolean asignarSillaEconomica(int[][] puestos, int cedula, int[] cedulas, int[] puesto, boolean[][] sillasEconomicas){
+        
+        boolean ocupado = false;
+        if(sillasEconomicas[puesto[0]][puesto[1]] == false){
+            int lugar = 0;
+            while(lugar < 50){
+                if(cedula == cedulas[lugar]){break;}
+                lugar++;
+            }
+            sillasEconomicas[puesto[0]][puesto[1]] = true;
+            puestos[lugar][0] = puesto[0];
+            puestos[lugar][1] = puesto[1];
+        }else{ocupado = true;}
+        return ocupado;
+    }
+    
+    public static void anularReserva (int cedula, boolean[][] sillas, int[] cedulas, String[] nombres, int[][] puestos){
+        int lugar = 0;
+        while(lugar < 50){
+            if(cedula == cedulas[lugar]){
+                cedulas[lugar] = 0;
+                int[] silla = {puestos[lugar][0],puestos[lugar][1]};
+                sillas[silla[0]][silla[1]] = false;
+                nombres[lugar] = "";
+                puestos[lugar][0] = 0;
+                puestos[lugar][1] = 0;
+                puestos[lugar][2] = 0;
+            }
+        }
+    }
+    
+    public static int numeroDePuestosDisponibles(boolean[][] sillasEconomicas){
+        int disponibles = 0;
+        int repeticiones = 0;
+        int columna = 0;
+        for(int i = 0; i < 7; i++){
+            if(sillasEconomicas[i][columna] == false){disponibles++;};
+            if(repeticiones == 7){i = 0; columna = 5;}
+            repeticiones++;
+        }
+        return disponibles;
+    }
+    
+    
 }
 
