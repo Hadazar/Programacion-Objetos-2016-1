@@ -44,12 +44,12 @@ public class Avion {
         System.out.println("");
         
         System.out.print("Opcion: ");
-        int opcion = Leer.nextInt();
+        String opcion = Leer.next();
             System.out.println("");
      
             
         switch(opcion){
-            case 1:
+            case "1":
                 
                     //Datos del pasajero
                 int posicion = 0;
@@ -95,13 +95,13 @@ public class Avion {
                 posicion++;
                 break;
                 
-            case 2:
+            case "2":
                 
                 System.out.print("Cantidad de sillas ejecutivas ocupadas: " + sillasOcupadas(sillasEjecutivas));
                 System.out.println("");
                 break;
                 
-            case 3:
+            case "3":
                 
                 System.out.print("Cedula del pasajero: ");
                 int cedula = Leer.nextInt();
@@ -113,7 +113,7 @@ public class Avion {
                 System.out.println("");
                 break;
                 
-            case 4:
+            case "4":
                 
                 System.out.println("Sillas economicas disponibles:\n");
                 int[][] sillasDisponibles = localizarSillaDisponible(sillasEconomicas);
@@ -127,7 +127,7 @@ public class Avion {
                 }
                 break;
                 
-            case 5:
+            case "5":
                 
                 System.out.println("Elija el puesto del pasajero:\n");
                 int[] puesto = new int[2];
@@ -139,7 +139,7 @@ public class Avion {
                 System.out.println("");
                 break;
                 
-            case 6:
+            case "6":
                 System.out.print("Cedula del pasajero: ");
                 int cedula2 = Leer.nextInt();
                 System.out.println("");
@@ -154,16 +154,22 @@ public class Avion {
                 }
                 break;
                 
-            case 7:
+            case "7":
                 
                 System.out.println("Puestos disponibles: " + numeroDePuestosDisponibles(sillasEconomicas));
                 break;
                 
-            case 8:
+            case "8":
                 
-                
+                System.out.println("Nombres Repetidos:\n");
+                String[] nombresRepetidos = nombresRepetidos(nombres);
+                for(int i = 0; i < 50; i++){
+                    if(!nombresRepetidos[i].equals("")){
+                        System.out.println(nombresRepetidos[i]);
+                    }
+                }
                 break;
-            default:
+            default:System.out.println("No existe esa opcion");
         }
         } 
       
@@ -340,6 +346,19 @@ public class Avion {
         return disponibles;
     }
     
-    
+    public static String[] nombresRepetidos(String[] nombres){
+        
+        String[] nombresRepetidos = new String[50];
+        int posicion = 0;
+        for(int i = 0; i < 50; i++){
+            for(int j = 0; j < 50; j++){
+                if(nombres[i] == nombres[j]){
+                    nombresRepetidos[posicion] = nombres[i];
+                    posicion++;
+                }
+            }
+        }
+        return nombresRepetidos;
+    }
 }
 
