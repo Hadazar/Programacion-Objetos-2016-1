@@ -1,12 +1,12 @@
-Explicaci髇 del programa:
+Explicaci贸n del programa:
 
-Pasos que ejecuta la funci髇 "GuessingGame":
+Pasos que ejecuta la funci贸n "GuessingGame":
 
 - Crea la variable "answer" y le asigna un valor aleatorio entre [1,100].
 - Crea la variable "guess" y le asigna el valor "0".
 - Crea la variable "numGuesses" y le asigna el valor "0".
 - Si el valor de la variable "numGuesses" no es mayor a "7", ni la variable "guess" posse el mismo valor que la variable "answer", realiza el siguiente ciclo:
-	- Se imprime en pantalla la frase "Guess a number" y el usuario determina el valor de la variable "guess".
+	- Imprime en pantalla la frase "Guess a number" y el usuario determina el valor de la variable "guess".
 	- Si el valor de la variable "guess" es menor al de la variable "answer":
 		- Imprime en pantalla la frase "Higher..."
 	- En cualquier otro caso:
@@ -18,9 +18,9 @@ Pasos que ejecuta la funci髇 "GuessingGame":
 - Si el valor de la variable "guess" es mayor a "7":
 	 - Imprime en pantalla la frase "You loser".
 
-Pasos que ejecuta la funci髇 "main":
+Pasos que ejecuta la funci贸n "main":
 
 - Crea la variable "playAgain" y le asigna el caracter "y".
 - Si el caracter de "playAgain" no es diferente de "y", realiza el siguiente ciclo:
-	- Ejecuta la funci髇 "GuessingGame".
+	- Ejecuta la funci贸n "GuessingGame".
 	- Imprime en panatalla la frase "Would you like play another game(y/n): " y el usuario determina el caracter asignado a la variable "playAgain"
