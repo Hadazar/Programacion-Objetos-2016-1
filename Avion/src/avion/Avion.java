@@ -92,7 +92,7 @@ public class Avion {
                     if(estaLlena == 1){System.out.println("La silla esta ocupada");}
                     else{posicion++;}
                 }else{System.out.println("Esa ubicacion no existe");}
-                
+                posicion++;
                 break;
                 
             case 2:
@@ -115,8 +115,21 @@ public class Avion {
                 
             case 4:
                 
+                System.out.println("Sillas economicas disponibles:\n");
+                int[][] sillasDisponibles = localizarSillaDisponible(sillasEconomicas);
+                int posicionx = 0;
+                int posiciony = 0;
+                while(sillasDisponibles[posicionx][posiciony] != 0){
+                    System.out.println("Fila:" + sillasDisponibles[posicionx][posiciony]);
+                    System.out.println("Columna" + sillasDisponibles[posicionx][posiciony]);
+                    System.out.println("");
+                    posicionx++;
+                }
                 break;
+                
             case 5:
+                
+                
                 break;
             case 6:
                 break;
@@ -239,6 +252,23 @@ public class Avion {
         silla[1] = posiciones[posicion][1];
         silla[1] = posiciones[posicion][2];
         return silla;
+    }
+    
+    public static int[][] localizarSillaDisponible(boolean[][] sillasEconomicas){
+        
+        int[][] sillasDisponibles = new int[50][2];
+        int posicionx = 0;
+        int posiciony = 0;
+        for(int i = 0; i < 7; i++){
+            for(int j = 0; j < 6; j++){
+                if (sillasEconomicas[i][j] = false){
+                    sillasDisponibles[posicionx][posiciony] = i + 1;
+                    sillasDisponibles[posicionx][posiciony + 1] = j + 1;
+                    posicionx++;
+                }
+            }
+        }
+        return sillasDisponibles;
     }
 }
 
