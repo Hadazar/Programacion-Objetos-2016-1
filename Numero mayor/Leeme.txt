@@ -1,3 +1,5 @@
+Explicación del programa:
+
 Pasos que ejecuta el programa:
 
 - Crea la variable "mayor" y le asigna el valor "0".

@@ -1,3 +1,5 @@
+Explicación del programa:
+
 Pasos que ejecuta el programa:
 
 - Crea las variables "cuenta_as", "contador" y "blan", y cada una le asigna el valor "1".

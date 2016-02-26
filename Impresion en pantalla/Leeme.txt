@@ -1,0 +1,16 @@
+Explicación del programa:
+
+Pasos que ejecuta la primera funcion:
+
+- Imprime en pantalla la frase "Segunda función".
+
+Pasos que ejecuta la segunda funcion:
+
+- Imprime en pantalla la frase "Tercera función".
+
+Pasos que ejecuta la funcion principal:
+
+- Imprime en pantalla la frase "Primera función en Main".
+- Ejecuta la primera funcion.
+- Ejecuta la segunda funcion.
+- Imprime en pantalla la frase "Se termina el Main".
