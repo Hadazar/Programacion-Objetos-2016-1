@@ -153,7 +153,7 @@ public class Elecciones {
         int columnaCandidato = 0;
         while(!candidato.equals(etiquetasCandidatos[columnaCandidato])){
             columnaCandidato++;
-            if(columnaCandidato > numeroCandidatos){break;}
+            if(columnaCandidato == numeroCandidatos - 1){break;}
         }
         
         int votosRecibidos = 0;
