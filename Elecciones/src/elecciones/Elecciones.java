@@ -66,17 +66,34 @@ public class Elecciones {
             System.out.println("");
         }
         
+        //Votos para un candidato en especifico
         
         System.out.print("Candidato a consultar: ");
         String candidato = Leer.next();
-        int totalVotos = totalVotos(candidato, tabla, numeroCandidatos, numeroMunicipios);
+        int totalVotos = totalVotos(tabla, numeroCandidatos, numeroMunicipios);
         double[] votosRecibidos = votosRecibidos(candidato, etiquetasCandidatos, tabla, numeroCandidatos, numeroMunicipios, totalVotos);
         System.out.println("Votos: " + votosRecibidos[0]);
-        System.out.println("Porcentaje: " + votosRecibidos[1]);
+        System.out.println("Porcentaje: " + (votosRecibidos[1]) + "%");
+        System.out.println(totalVotos);
+        
+        
+        //Candidato mas votado
+        int[] votosPorCandidato = new int[numeroCandidatos];
+        
+        for(int i = 0; i < numeroCandidatos; i++){
+            votosPorCandidato[i] = (int)votosRecibidos(etiquetasCandidatos[i], etiquetasCandidatos, tabla, numeroCandidatos, numeroMunicipios, totalVotos)[0];
+        }
+        
+        String[] cantidatoMasVotado = candidatoMasVotado(votosPorCandidato, etiquetasCandidatos, numeroCandidatos, totalVotos);
+        
+        //Lista de candidatos en orden (desde el mas votado al menos votado)
+        String[] listaCandidatos = new String[numeroCandidatos];
         
         System.out.println("");
         imprimirTabla(tabla, etiquetasCandidatos, etiquetasMunicipios, numeroCandidatos, numeroMunicipios);
     }
+    
+    //Funciones:
     
     public static void imprimirTabla(int[][] tabla, String[] etiquetasCandidatos, String[] etiquetasMunicipios, int numeroCandidatos, int numeroMunicipios){
         
@@ -95,34 +112,82 @@ public class Elecciones {
         }
     }
     
-    public static int totalVotos(String candidato, int[][]tabla, int numeroCandidatos, int numeroMunicipios){
+    public static int totalVotos(int[][]tabla, int numeroCandidatos, int numeroMunicipios){
         
         int totalVotos = 0;
         for(int i = 0; i < numeroMunicipios; i++){
             for(int j = 0; j < numeroCandidatos; j++){
-                totalVotos =+ tabla[i][j];
+                totalVotos += tabla[i][j];
             }
         }
         return totalVotos;
     }
     
+    //falta corregir esta funcion
     public static double[] votosRecibidos(String candidato, String[] etiquetasCandidatos, int[][]tabla, int numeroCandidatos, int numeroMunicipios, int totalVotos){
         
         int columnaCandidato = 0;
-        while(candidato.equals(etiquetasCandidatos[columnaCandidato])){
+        while(!candidato.equals(etiquetasCandidatos[columnaCandidato])){
             columnaCandidato++;
+            if(columnaCandidato > numeroCandidatos){break;}
         }
         
         int votosRecibidos = 0;
         for (int i = 0; i < numeroMunicipios; i++){
-            votosRecibidos =+ tabla[i][columnaCandidato];
+            votosRecibidos += tabla[i][columnaCandidato];
         }
         
-        double porcentaje = votosRecibidos / totalVotos;
+        double porcentaje = (votosRecibidos / totalVotos)*100;
         
         double[] datos = {votosRecibidos, porcentaje};
         
         return datos;
     }
     
+    public static String[] candidatoMasVotado(int[] votosPorCandidato, String[] etiquetasCandidatos, int numeroCandidatos, int totalVotos){
+        
+        int mayor = 0;
+        for(int i = 0; i < numeroCandidatos; i++){
+            if(votosPorCandidato[i] > mayor){mayor = votosPorCandidato[i];}
+        }
+        
+        int posicion = 0;
+        while(votosPorCandidato[posicion] != mayor){
+            posicion++;
+        }
+        
+        double porcentaje = (mayor / totalVotos)*100;
+        boolean hayGanador = true;
+        int posicion2 = 0;
+        int posicion3 = 0;
+        if(porcentaje < 50){
+            int mayor2 = 0;
+            for(int i = 0; i < numeroCandidatos; i++){
+                if((votosPorCandidato[i] > mayor2) && (votosPorCandidato[i] != mayor)){mayor2 = votosPorCandidato[i];}
+            }
+        
+            while(votosPorCandidato[posicion2] != mayor2){
+                posicion2++;
+            }
+            hayGanador = false;
+        }
+        if(porcentaje == 50){
+            
+            while((votosPorCandidato[posicion3] != mayor)||(posicion == posicion3)){
+                posicion++;
+            }
+            hayGanador = false;
+        }
+        
+        String[] candidatoMasVotado = new String[2];
+        String Ganador = etiquetasCandidatos[posicion];
+        String Ganador2;
+        if (porcentaje < 50){
+            Ganador2 =etiquetasCandidatos[posicion2];
+        }else if(porcentaje == 50){
+            Ganador2 =etiquetasCandidatos[posicion3];
+        }
+        
+        return candidatoMasVotado;
+    }
 }
