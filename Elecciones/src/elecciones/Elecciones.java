@@ -17,11 +17,11 @@ public class Elecciones {
     public static void main(String[] args) {
         
         java.util.Scanner Leer = new java.util.Scanner(System.in);
-        
+        boolean continuidad = true;
         System.out.println("Escrutinio");
         System.out.println("");
         
-        //Solicitud numero de candidatos
+            //Solicitud numero de candidatos
         System.out.print("Número de candidatos (menor a 20): ");
         int numeroCandidatos = 21;
         while(numeroCandidatos > 20){
@@ -29,7 +29,7 @@ public class Elecciones {
         }
         System.out.println("");
         
-        //Solicitud numero de municipios
+            //Solicitud numero de municipios
         System.out.print("Numero de municipios (menor a 20): ");
         int numeroMunicipios = 21;
         while(numeroMunicipios > 20){
@@ -41,21 +41,21 @@ public class Elecciones {
         String[] etiquetasCandidatos = new String[numeroCandidatos];
         String[] etiquetasMunicipios = new String[numeroMunicipios];
         
-        //Se crean las etiquetas de candidatos(candidato A, candidato B...)
+            //Se crean las etiquetas de candidatos(candidato A, candidato B...)
         char letra = 'A';
         for(int i = 0; i < numeroCandidatos; i++){
             etiquetasCandidatos[i] = "Candidato " + letra;
             letra++;
         }
         
-        //Se crean las etiquetas de municipios(municipio 1, municipio 2...)
+            //Se crean las etiquetas de municipios(municipio 1, municipio 2...)
         char numero = '1';
         for(int i = 0; i < numeroMunicipios; i++){
             etiquetasMunicipios[i] = "Municipio " + numero;
             numero++;
         }
         
-        //Llenado de la tabla
+            //Llenado de la tabla
         for(int i = 0; i < numeroMunicipios; i++){
             System.out.println(etiquetasMunicipios[i] + ":");
             System.out.println("");
@@ -66,31 +66,55 @@ public class Elecciones {
             System.out.println("");
         }
         
-        //Votos para un candidato en especifico
+        while(continuidad == true){
         
-        System.out.print("Candidato a consultar: ");
-        String candidato = Leer.next();
-        int totalVotos = totalVotos(tabla, numeroCandidatos, numeroMunicipios);
-        double[] votosRecibidos = votosRecibidos(candidato, etiquetasCandidatos, tabla, numeroCandidatos, numeroMunicipios, totalVotos);
-        System.out.println("Votos: " + votosRecibidos[0]);
-        System.out.println("Porcentaje: " + (votosRecibidos[1]) + "%");
-        System.out.println(totalVotos);
+        System.out.println("Elija una opcion:\n");
+        System.out.println("1. Imprimir reporte de las votaciones.");
+        System.out.println("2. Imprimir la cantidad de votos recibidos por candidato y su correspondiente porcentaje.");
+        System.out.println("3. Visualizar el candidato más votado.");
+        System.out.println("4. Generar una lista ordenada de candidatos desde el mas votado hasta el menos votado.");
+        System.out.println("");
+        System.out.print("Opcion: ")
+        String opcion = Leer.next();
         
-        
-        //Candidato mas votado
-        int[] votosPorCandidato = new int[numeroCandidatos];
-        
-        for(int i = 0; i < numeroCandidatos; i++){
-            votosPorCandidato[i] = (int)votosRecibidos(etiquetasCandidatos[i], etiquetasCandidatos, tabla, numeroCandidatos, numeroMunicipios, totalVotos)[0];
+        switch(opcion){
+            case 1:
+                System.out.println("");
+                imprimirTabla(tabla, etiquetasCandidatos, etiquetasMunicipios, numeroCandidatos, numeroMunicipios);
+                break;
+            case 2:
+                int posicion = 0;
+                while(posicion < numeroCandidatos){
+                    //Votos por candidato
+                    String candidato = etiquetasCandidatos[posicion];
+                    System.out.println(etiquetasCandidatos[posicion] + "\n");
+                    int totalVotos = totalVotos(tabla, numeroCandidatos, numeroMunicipios);
+                    double[] votosRecibidos = votosRecibidos(candidato, etiquetasCandidatos, tabla, numeroCandidatos, numeroMunicipios, totalVotos);
+                    System.out.println("Votos: " + votosRecibidos[0]);
+                    System.out.println("Porcentaje: " + (votosRecibidos[1]) + "%");
+                    System.out.println("");
+                    posicion++;
+                }
+                break;
+            case 3:
+                //Candidato mas votado
+                int[] votosPorCandidato = new int[numeroCandidatos];
+                for(int i = 0; i < numeroCandidatos; i++){
+                    votosPorCandidato[i] = (int)votosRecibidos(etiquetasCandidatos[i], etiquetasCandidatos, tabla, numeroCandidatos, numeroMunicipios, totalVotos)[0];
+                }
+                String[] cantidatoMasVotado = candidatoMasVotado(votosPorCandidato, etiquetasCandidatos, numeroCandidatos, totalVotos);
+                System.out.println("Candidato mas votado: " + candidatoMasVotado);
+                break;
+            case 4:
+                int[][] listaCandidatos = ordenarcandidatos(votosPorCandidato, numeroCandidatos);
+                for(int i = 0; i < numeroCandidatos; i++){
+                    System.out.println(etiquetasCandidatos[listaCandidatos[i][1]);
+                    System.out.println("Votos: " + listaCandidatos[i][0]);
+                }
+                break;
+        }
         }
         
-        String[] cantidatoMasVotado = candidatoMasVotado(votosPorCandidato, etiquetasCandidatos, numeroCandidatos, totalVotos);
-        
-        //Lista de candidatos en orden (desde el mas votado al menos votado)
-        String[] listaCandidatos = new String[numeroCandidatos];
-        
-        System.out.println("");
-        imprimirTabla(tabla, etiquetasCandidatos, etiquetasMunicipios, numeroCandidatos, numeroMunicipios);
     }
     
     //Funciones:
@@ -191,30 +215,22 @@ public class Elecciones {
         return candidatoMasVotado;
     }
     
-    public static int[] ordenarNumeros(int[] votosPorCandidato, int numeroCandidatos){
+    public static int[][] ordenarcandidatos(int[] votosPorCandidato, int numeroCandidatos){
         
-        int[] listaNumeros = new int[numeroCandidatos];
+        int[][] listaNumeros = new int[numeroCandidatos][2];
         int mayor = 0;
         for(int j = 0; j < numeroCandidatos; j++){
+            int posicion = 0;
             for(int i = 0; i < numeroCandidatos; i++){
                 if(votosPorCandidato[i] > mayor){
-                    listaNumeros[j] = votosPorCandidato[i]; votosPorCandidato[i] = 0;
+                    mayor = votosPorCandidato[i];
+                    posicion = i;
                 }
             }
+            listaNumeros[j][0] = mayor; listaNumeros[j][1] = posicion;
+            votosPorCandidato[i] = 0;
             mayor = 0;
         }
         return listaNumeros;
-    }
-    
-    public static int[] ordenarPosiciones(int[] votosPorCandidato, int[] listaNumeros, int numeroCandidatos){
-        int[] listaPosiciones = new int[numeroCandidatos];
-        for(int j = 0; j < numeroCandidatos; j++){
-            for(int i = 0; i < numeroCandidatos; i++){
-                if(listaNumeros[j] == votosPorCandidato[i]){
-                    listaPosiciones[j] = i;
-                }
-            }
-        }
-        return listaPosiciones;
     }
 }
