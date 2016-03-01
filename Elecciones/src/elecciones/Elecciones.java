@@ -78,6 +78,8 @@ public class Elecciones {
         System.out.print("Opcion: ");
         String opcion = Leer.next();
         
+        int[] votosPorCandidato = new int[numeroCandidatos];
+        
         switch(opcion){
             case "1":
                 System.out.println("");
@@ -98,7 +100,6 @@ public class Elecciones {
                 break;
             case "3":
                 //Candidato mas votado
-                int[] votosPorCandidato = new int[numeroCandidatos];
                 for(int i = 0; i < numeroCandidatos; i++){
                     votosPorCandidato[i] = (int)votosRecibidos(etiquetasCandidatos[i], etiquetasCandidatos, tabla, numeroCandidatos, numeroMunicipios, totalVotos)[0];
                 }
