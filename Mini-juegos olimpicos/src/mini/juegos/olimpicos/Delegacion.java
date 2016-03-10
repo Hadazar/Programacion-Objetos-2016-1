@@ -20,8 +20,14 @@ public class Delegacion {
         this.numeroMedallas = numeroMedallas;
         this.grupos = grupos;
     }
+
+    public String getPais() {
+        return pais;
+    }
     
-    
+    public Grupo getGrupo(int posicion){
+        return grupos[posicion];
+    }
     
     public void setMedallas(String tipo, int cantidad){
         switch(tipo){
@@ -34,7 +40,7 @@ public class Delegacion {
         }
     }
     
-    public int totalMedallas(int cantidad){
+    public int totalMedallas(){
         int total = 0;
         for(int medallas : numeroMedallas){
             total += medallas;
@@ -42,13 +48,26 @@ public class Delegacion {
         return total;
     }
     
-    public boolean busquedaDeporte(String deporte){
-        boolean existeDeporte = false;
-        for(Grupo grupo : grupos){
-            if(deporte.equals(grupo.getNombreDelDeporte())){
-                existeDeporte = true; break;
+    public int[] busquedaDeporte(String deporte){
+        int[] resultado = {0,0};
+        while(resultado[1] < 5){
+            if(deporte.equals(grupos[resultado[1]].getNombreDelDeporte())){
+                resultado[0] = 1; break;
             };
+            resultado[1]++;
         }
-        return existeDeporte;
+        return resultado;
+    }
+    
+    public void imprimirDatos(){
+        
+        System.out.println("Delegacion de " + pais + "\n");
+        System.out.println("Medallas de bronce: " + numeroMedallas[0]);
+        System.out.println("Medallas de plata: " + numeroMedallas[1]);
+        System.out.println("Medallas de oro: " + numeroMedallas[0] + "\n");
+        System.out.println("Grupos:\n");
+        for(Grupo grupo : grupos){
+            grupo.imprimirDatos();
+        }
     }
 }

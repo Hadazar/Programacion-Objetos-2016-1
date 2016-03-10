@@ -11,13 +11,12 @@ package mini.juegos.olimpicos;
  */
 public class MiniJuegosOlimpicos {
 
-    private static Delegacion[] delegaciones;
-    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         
+        Delegacion[] delegaciones = new Delegacion[10];
         java.util.Scanner leer = new java.util.Scanner(System.in);
         int posicion = 0;
         boolean continuar = true;
@@ -37,6 +36,7 @@ public class MiniJuegosOlimpicos {
             
             switch(opcion){
                 case '1':
+                    if(posicion == 9){System.out.println("Los cupos de incripcion están llenos\n");break;}
                     System.out.println("Diligencie los datos\n");
                     System.out.print("Pais: ");
                     String pais = leer.next();
@@ -50,15 +50,88 @@ public class MiniJuegosOlimpicos {
                     System.out.println("");
                     System.out.print("Número de medallas de oro: ");
                     numeroMedallas[2] = leer.nextInt();
-                    System.out.println("");
+                    System.out.println("\n");
                     Grupo[] grupos = new Grupo[5];
-                    delegaciones[posicion] = new Delegacion(pais, numeroMedallas);
+                    char numeroGrupo = '1';
+                    for(int i = 0; i < 5; i++){
+                        System.out.println("Grupo " + numeroGrupo + "\n");
+                        numeroGrupo++;
+                        System.out.print("Deporte: ");
+                        String deporte = leer.next();
+                        System.out.println("");
+                        System.out.print("Numero de integrantes: ");
+                        int numeroIntegrantes = leer.nextInt();
+                        System.out.println("");
+                        while((2 > numeroIntegrantes)||(numeroIntegrantes  > 10)){
+                            numeroIntegrantes = leer.nextInt();
+                        }
+                        Integrante[] integrantes = new Integrante[numeroIntegrantes];
+                        char numeroIntegrante = '1';
+                        for(int j = 0; j < numeroIntegrantes; j++){
+                            System.out.println("Integrante " + numeroIntegrante + ":\n");
+                            numeroIntegrante++;
+                            System.out.print("Nombre: ");
+                            String nombre = leer.next();
+                            System.out.println("");
+                            System.out.print("Apellido: ");
+                            String apellido = leer.next();
+                            System.out.println("\n");
+                            integrantes[j] = new Integrante(nombre, apellido);
+                        }
+                        grupos[i] = new Grupo(deporte, integrantes);
+                    }
+                    delegaciones[posicion] = new Delegacion(pais, numeroMedallas, grupos);
                     break;
                 case '2':
+                    System.out.print("Deporte: ");
+                    String deporte = leer.next();
+                    System.out.println("");
+                    int casilla = 0;
+                    System.out.println("Delegaciones con grupo de ese deporte:\n");
+                    while(delegaciones[casilla] != null && casilla < 10){
+                        if(delegaciones[casilla].busquedaDeporte(deporte)[0] == 1){
+                            System.out.println(delegaciones[casilla].getPais() + "\n");
+                            delegaciones[casilla].getGrupo(delegaciones[casilla].busquedaDeporte(deporte)[1]).imprimirDatos();
+                        };
+                        casilla++;
+                    };
                     break;
                 case '3':
+                    System.out.print("Pais de la delegacion: ");
+                    String paisDelegacion = leer.next();
+                    int lugar = 0;
+                    while(lugar < 10){
+                        if(paisDelegacion.equals(delegaciones[lugar].getPais())){
+                            break;
+                        }
+                        lugar++;
+                    }
+                    System.out.print("Tipo de medalla: ");
+                    String medalla = leer.next();
+                    System.out.println("");
+                    System.out.print("Numero de medallas: ");
+                    int cantidadMedallas = leer.nextInt();
+                    System.out.println("");
+                    delegaciones[lugar].setMedallas(medalla, cantidadMedallas);
                     break;
                 case '4':
+                    int ubicacion = 0;
+                    int totalMedallas = 0;
+                    while((delegaciones[ubicacion] != null) && ubicacion < 10){
+                        if(delegaciones[ubicacion].totalMedallas() > totalMedallas){
+                            totalMedallas += delegaciones[ubicacion].totalMedallas();
+                        }
+                        ubicacion++;
+                    }
+                    ubicacion = 0;
+                    while(ubicacion < 10){
+                        if(delegaciones[ubicacion].totalMedallas() == totalMedallas){
+                            break;
+                        }
+                        ubicacion++;
+                    }
+                    System.out.println("Delegacion con mas medallas:\n");
+                    delegaciones[ubicacion].imprimirDatos();
                     break;
                 default:
             }

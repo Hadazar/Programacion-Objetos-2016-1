@@ -26,4 +26,9 @@ public class Integrante {
     public String getApellido() {
         return apellido;
     }
+    
+    public void imprimirDatos(){
+        System.out.println("Nombre: " + nombre);
+        System.out.println("Apellido: " + apellido + "\n");
+    }
 }
