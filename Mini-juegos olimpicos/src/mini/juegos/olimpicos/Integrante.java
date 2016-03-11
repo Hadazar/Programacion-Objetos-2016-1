@@ -18,14 +18,6 @@ public class Integrante {
         this.nombre = nombre;
         this.apellido = apellido;
     }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
     
     public void imprimirDatos(){
         System.out.println("Nombre: " + nombre);
