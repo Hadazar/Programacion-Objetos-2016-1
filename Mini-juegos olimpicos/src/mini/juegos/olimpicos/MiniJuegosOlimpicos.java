@@ -6,9 +6,8 @@
 package mini.juegos.olimpicos;
 
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.Scanner;
+import java.util.*;
 /**
  *
  * @author HéctorAugusto
@@ -18,14 +17,17 @@ public class MiniJuegosOlimpicos {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args){
         
+        ArrayList<Scanner> lectura= new ArrayList<Scanner>();
         Delegacion[] delegaciones = new Delegacion[10];
-        BufferedReader leer = new BufferedReader(new InputStreamReader(System.in));
         int posicion = 0;
         boolean continuar = true;
         
         while(continuar = true){
+            
+            lectura.add(new Scanner(System.in));
+            lectura.add(new Scanner(System.in));
             
             System.out.println("Mini-juegos Olimpicos\n");
             System.out.println("Menu de opciones:\n");
@@ -35,7 +37,7 @@ public class MiniJuegosOlimpicos {
             System.out.println("4. Identificar la delegación con mas medallas.\n");
 
             System.out.print("Elija una opción: ");
-            char opcion = leer.readLine().charAt(0);
+            char opcion = lectura.get(0).next().charAt(0);
             System.out.println("\n");
             
             switch(opcion){
@@ -43,17 +45,17 @@ public class MiniJuegosOlimpicos {
                     if(posicion == 9){System.out.println("Los cupos de incripcion están llenos\n");break;}
                     System.out.println("Diligencie los datos\n");
                     System.out.print("Pais: ");
-                    String pais = leer.readLine();
+                    String pais = lectura.get(1).next();
                     System.out.println("");
                     int[] numeroMedallas = new int[3];
                     System.out.print("Número de medallas de bronce: ");
-                    numeroMedallas[0] = leer.read();
+                    numeroMedallas[0] = lectura.get(0).nextInt();
                     System.out.println("");
                     System.out.print("Número de medallas de plata: ");
-                    numeroMedallas[1] = leer.read();
+                    numeroMedallas[1] = lectura.get(1).nextInt();
                     System.out.println("");
                     System.out.print("Número de medallas de oro: ");
-                    numeroMedallas[2] = leer.read();
+                    numeroMedallas[2] = lectura.get(0).nextInt();
                     System.out.println("\n");
                     Grupo[] grupos = new Grupo[5];
                     char numeroGrupo = '1';
@@ -61,13 +63,13 @@ public class MiniJuegosOlimpicos {
                         System.out.println("Grupo " + numeroGrupo + "\n");
                         numeroGrupo++;
                         System.out.print("Deporte: ");
-                        String deporte = leer.readLine();
+                        String deporte = lectura.get(1).next();
                         System.out.println("");
                         System.out.print("Numero de integrantes: ");
-                        int numeroIntegrantes = leer.read();
+                        int numeroIntegrantes = lectura.get(0).nextInt();
                         System.out.println("");
                         while((2 > numeroIntegrantes)||(numeroIntegrantes  > 10)){
-                            numeroIntegrantes = leer.read();
+                            numeroIntegrantes = lectura.get(1).nextInt();
                         }
                         Integrante[] integrantes = new Integrante[numeroIntegrantes];
                         char numeroIntegrante = '1';
@@ -75,10 +77,10 @@ public class MiniJuegosOlimpicos {
                             System.out.println("Integrante " + numeroIntegrante + ":\n");
                             numeroIntegrante++;
                             System.out.print("Nombre: ");
-                            String nombre = leer.readLine();
+                            String nombre = lectura.get(0).next();
                             System.out.println("");
                             System.out.print("Apellido: ");
-                            String apellido = leer.readLine();
+                            String apellido = lectura.get(1).next();
                             System.out.println("\n");
                             integrantes[j] = new Integrante(nombre, apellido);
                         }
@@ -88,7 +90,7 @@ public class MiniJuegosOlimpicos {
                     break;
                 case '2':
                     System.out.print("Deporte: ");
-                    String deporte = leer.readLine();
+                    String deporte = lectura.get(0).next();
                     System.out.println("");
                     int casilla = 0;
                     System.out.println("Delegaciones con grupo de ese deporte:\n");
@@ -102,7 +104,7 @@ public class MiniJuegosOlimpicos {
                     break;
                 case '3':
                     System.out.print("Pais de la delegacion: ");
-                    String paisDelegacion = leer.readLine();
+                    String paisDelegacion = lectura.get(1).next();
                     int lugar = 0;
                     while(lugar < 10){
                         if(paisDelegacion.equals(delegaciones[lugar].getPais())){
@@ -111,10 +113,10 @@ public class MiniJuegosOlimpicos {
                         lugar++;
                     }
                     System.out.print("Tipo de medalla: ");
-                    String medalla = leer.readLine();
+                    String medalla = lectura.get(0).next();
                     System.out.println("");
                     System.out.print("Numero de medallas: ");
-                    int cantidadMedallas = leer.read();
+                    int cantidadMedallas = lectura.get(1).nextInt();
                     System.out.println("");
                     delegaciones[lugar].setMedallas(medalla, cantidadMedallas);
                     break;
@@ -139,6 +141,7 @@ public class MiniJuegosOlimpicos {
                     break;
                 default:
             }
+            lectura.clear();
         }
     }
     
