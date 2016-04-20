@@ -42,8 +42,9 @@ public class UI {
     public void menu(){
         int opcion = 0;     
         System.out.println("Bienvenido a la mediateca\n");
-        System.out.println("Opciones:\n\n 1. Cargar datos.\n 2. Imprimir repertorio.");
-        System.out.println("3. Buscar por título. 4. Buscar por autor");
+        System.out.println("Opciones:\n\n1. Cargar datos.\n2. Imprimir repertorio.");
+        System.out.println("3. Buscar por título.\n4. Buscar por autor");
+        System.out.println("5. Cargar miembros.\n6. Prestamo");
         opcion = this.leer.nextInt();
         
         switch(opcion){
@@ -63,7 +64,7 @@ public class UI {
                 this.imprimirSoportes(soportes);
                 break;
             case 3:
-                System.out.println("Título: ");
+                System.out.println("Título del soporte: ");
                 String titulo = leer.next();
                 Soporte soporte = servicio.busquedaPorTitulo(titulo);
                 System.out.println(soporte);
@@ -74,6 +75,22 @@ public class UI {
                 Soporte soporteB = servicio.busquedaPorAutor(nombre);
                 System.out.println(soporteB);
                 break;
+            case 5:
+                System.out.println("Nombre del archivo:");
+                String rutaArchivo2 = leer.next();
+                try {
+                    this.servicio.cargarMiembros(rutaArchivo2);
+                } catch (FileNotFoundException ex) {
+                    System.out.println("El archivo especificado no existe");
+                } catch (LibroException ex) {
+                    System.out.println(ex.getMessage());
+                }
+                break;
+            case 6:
+                System.out.println("Titulo del soporte:");
+                String titulo2 = leer.next();
+                Soporte soporte3 = servicio.busquedaPorTitulo(titulo2);
+                System.out.println(soporte3);
             default:
                 System.out.println("Opcion invalida");
         }

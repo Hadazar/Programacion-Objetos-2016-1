@@ -9,6 +9,17 @@ package data;
  *
  * @author HéctorAugusto
  */
-public class Miembro {
+public class Miembro extends Persona{
     
+    private String direccion;
+    private int prestamos;
+
+    public Miembro(String direccion, String nombre, String apellido) {
+        super(nombre, apellido);
+        this.direccion = direccion;
+    }
+    
+    public void setPrestamos(){
+        prestamos++;
+    }
 }

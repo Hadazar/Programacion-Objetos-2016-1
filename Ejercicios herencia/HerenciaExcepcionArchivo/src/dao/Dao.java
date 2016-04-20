@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import data.Persona;
 import data.Libro;
+import data.Miembro;
 import data.Soporte;
 
 /**
@@ -30,7 +31,16 @@ public class Dao {
         
         return persona;
     }
+    
+    public Miembro cargarMiembro(Scanner archivo){
         
+        Persona persona = cargarPersona(archivo);
+        String direccion = archivo.next().trim();
+        Miembro miembro = new Miembro(direccion, persona.getNombre(), persona.getApellido());
+        
+        return miembro;
+    }
+    
     public Libro cargarLibro(Scanner archivo) throws LibroException{
 	
 	String titulo = archivo.next().trim();
@@ -100,5 +110,17 @@ public class Dao {
 	
 	return soportes;
    }
+    
+    public ArrayList<Miembro> cargarMiembros(String archivo)throws FileNotFoundException, LibroException{
+        
+        ArrayList<Miembro> miembros = new ArrayList<Miembro>();
+        Scanner leer = new Scanner(new File(archivo));
+        leer.useDelimiter(",");
+        while(leer.hasNext()){
+            miembros.add(cargarMiembro(leer));
+        }
+        
+        return miembros;
+    }
     
 }

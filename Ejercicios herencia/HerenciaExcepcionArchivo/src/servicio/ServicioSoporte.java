@@ -7,6 +7,7 @@ package servicio;
 
 import Exception.LibroException;
 import dao.Dao;
+import data.Miembro;
 import data.Soporte;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 public class ServicioSoporte {
     private Dao dao;
     private ArrayList<Soporte> soportes = null; //Debe ser mejorado notablemente.
+    private ArrayList<Miembro> miembros = null;
     public ServicioSoporte(){
       this.dao = new Dao();
      }
@@ -28,6 +30,14 @@ public class ServicioSoporte {
     
     public ArrayList<Soporte> getSoportes(){
       return this.soportes;
+    }
+    
+    public void cargarMiembros(String archivo) throws FileNotFoundException, LibroException{
+        this.miembros=this.dao.cargarMiembros(archivo);
+    }
+    
+    public ArrayList<Miembro> getMiembros(){
+        return this.miembros;
     }
     
    public Soporte busquedaPorTitulo(String titulo){
