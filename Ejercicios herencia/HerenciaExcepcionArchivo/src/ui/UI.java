@@ -5,10 +5,14 @@
  */
 package ui;
 
-import Exception.LibroException;
+import Exception.PrestamoException;
+import Exception.SoporteException;
+import data.Miembro;
+import data.Prestamo;
 import data.Soporte;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -55,7 +59,7 @@ public class UI {
                     this.servicio.cargarSoportes(rutaArchivo);
                 } catch (FileNotFoundException ex) {
                     System.out.println("El archivo especificado no existe");
-                } catch (LibroException ex) {
+                } catch (SoporteException ex) {
                     System.out.println(ex.getMessage());
                 }
                 break;
@@ -82,15 +86,25 @@ public class UI {
                     this.servicio.cargarMiembros(rutaArchivo2);
                 } catch (FileNotFoundException ex) {
                     System.out.println("El archivo especificado no existe");
-                } catch (LibroException ex) {
+                } catch (SoporteException ex) {
                     System.out.println(ex.getMessage());
                 }
                 break;
             case 6:
+                System.out.println("Su nombre:");
+                String nombre2 = leer.next();
+                Miembro miembro = servicio.busquedaMiembro(nombre2);
                 System.out.println("Titulo del soporte:");
                 String titulo2 = leer.next();
                 Soporte soporte3 = servicio.busquedaPorTitulo(titulo2);
                 System.out.println(soporte3);
+                Date fechaActual = new Date();
+                Prestamo prestamo = new Prestamo(titulo2, fechaActual);
+                try{
+                    miembro.setPrestamos(prestamo);
+                }catch(PrestamoException e){
+                    System.out.println(e.getMessage());
+                }
             default:
                 System.out.println("Opcion invalida");
         }

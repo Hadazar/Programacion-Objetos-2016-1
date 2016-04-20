@@ -5,7 +5,7 @@
  */
 package servicio;
 
-import Exception.LibroException;
+import Exception.SoporteException;
 import dao.Dao;
 import data.Miembro;
 import data.Soporte;
@@ -24,15 +24,16 @@ public class ServicioSoporte {
       this.dao = new Dao();
      }
     
-    public void cargarSoportes(String archivo) throws FileNotFoundException, LibroException{
+    public void cargarSoportes(String archivo) throws FileNotFoundException, SoporteException{
        this.soportes = this.dao.cargarSoportes(archivo);
+       this.validarUnicidad();
     }
     
     public ArrayList<Soporte> getSoportes(){
       return this.soportes;
     }
     
-    public void cargarMiembros(String archivo) throws FileNotFoundException, LibroException{
+    public void cargarMiembros(String archivo) throws FileNotFoundException, SoporteException{
         this.miembros=this.dao.cargarMiembros(archivo);
     }
     
@@ -65,5 +66,35 @@ public class ServicioSoporte {
        
        return soporteBuscado;
    }
-    
+   
+   public Miembro busquedaMiembro(String nombre){
+       
+       Miembro miembroBuscado = null;
+       for(Miembro miembro: miembros){
+           if(miembro.getNombre().equals(nombre)){
+               miembroBuscado = miembro;
+               break;
+           }
+       }
+       return miembroBuscado;
+   }
+   
+   public void validarUnicidad(){
+       
+       for(Soporte soporte : soportes){
+           String titulo = soporte.getTitulo();
+           for(Soporte soporte2 : soportes){
+               if(soporte2.getTitulo().equals(titulo)){
+                   soportes.remove(soporte2);
+               }
+           }
+       }
+   }
+   
+   public String prestamosVencidos(){
+       
+       for(Miembro miembro : miembro){
+           
+       }
+   }
 }

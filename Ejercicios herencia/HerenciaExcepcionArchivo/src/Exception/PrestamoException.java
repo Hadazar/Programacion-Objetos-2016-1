@@ -7,10 +7,11 @@ package Exception;
 
 /**
  *
- * @author fabian.giraldo
+ * @author HéctorAugusto
  */
-public class LibroException extends Exception{
-    public LibroException(String mensaje){
-       super(mensaje);
+public class PrestamoException extends Exception{
+
+    public PrestamoException(String message) {
+        super(message);
     }
 }
