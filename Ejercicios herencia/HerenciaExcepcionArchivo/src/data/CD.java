@@ -37,4 +37,16 @@ public class CD extends Soporte{
         
         return soporte + titulo + genero + duracion + musicos;
     }
+    
+    public Persona getAutor(String nombre){
+        
+        Persona autor = null;
+        for(Persona persona : musicos){
+            if(persona.getNombre().equals(nombre)){
+                autor = persona;
+                break;
+            }
+        }
+        return autor;
+    }
 }

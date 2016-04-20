@@ -48,7 +48,7 @@ public class Dao {
         String genero = archivo.next().trim();
         double duracion = archivo.nextDouble();
         int cantidadMusicos = archivo.nextInt();
-        ArrayList<Persona> musicos = null;
+        ArrayList<Persona> musicos = new ArrayList<Persona>();
         for( int i = 0; i < cantidadMusicos; i++ ){
             musicos.add(cargarPersona(archivo));
         }
@@ -62,12 +62,12 @@ public class Dao {
 	String titulo = archivo.next().trim();
         double duracion = archivo.nextDouble();
         int cantidadAutores = archivo.nextInt();
-        Persona[] autores = new Persona[5];
+        Persona[] autores = new Persona[cantidadAutores];
         for( int i = 0; i < cantidadAutores; i++ ){
             autores[i] = cargarPersona(archivo);
         }
         int cantidadActores = archivo.nextInt();
-        ArrayList<Persona> actores = null;
+        ArrayList<Persona> actores = new ArrayList<Persona>();
         for( int i = 0; i < cantidadActores; i++ ){
             actores.add(cargarPersona(archivo));
         }

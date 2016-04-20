@@ -8,7 +8,7 @@ package data;
  *
  * @author fabian.giraldo
  */
-public class Soporte {
+public abstract class Soporte {
     
     private String titulo;
 
@@ -23,6 +23,7 @@ public class Soporte {
         this.titulo = titulo;
     }
 
+    public abstract Persona getAutor(String nombre);
     @Override
     public String toString() {
  

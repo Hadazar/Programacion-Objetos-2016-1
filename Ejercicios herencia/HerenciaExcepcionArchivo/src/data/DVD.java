@@ -41,4 +41,15 @@ public class DVD extends Soporte{
         return soporte + titulo + duracion + autores + actores;
     }
     
+    public Persona getAutor(String nombre){
+        
+        Persona autor = null;
+        for(Persona persona : autores){
+            if(persona.getNombre().equals(nombre)){
+                autor = persona;
+                break;
+            }
+        }
+        return autor;
+    }
 }

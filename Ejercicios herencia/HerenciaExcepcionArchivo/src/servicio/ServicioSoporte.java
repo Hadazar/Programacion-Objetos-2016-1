@@ -30,6 +30,30 @@ public class ServicioSoporte {
       return this.soportes;
     }
     
+   public Soporte busquedaPorTitulo(String titulo){
+       
+       Soporte soporteBuscado = null;
+       for(Soporte soporte : soportes){
+           if(soporte.getTitulo().equals(titulo)){
+               soporteBuscado = soporte;
+               break;
+           }
+       }
+       
+       return soporteBuscado;
+   }
    
+   public Soporte busquedaPorAutor(String autor){
+       
+       Soporte soporteBuscado = null;
+       for(Soporte soporte : soportes){
+           if(soporte.getAutor(autor).getNombre().equals(autor)){
+               soporteBuscado = soporte;
+               break;
+           }
+       }
+       
+       return soporteBuscado;
+   }
     
 }

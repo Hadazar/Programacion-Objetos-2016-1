@@ -42,26 +42,41 @@ public class UI {
     public void menu(){
         int opcion = 0;     
         System.out.println("Bienvenido a la mediateca\n");
-        System.out.println("Opciones. 1. Cargar datos 2. Imprimir.");
+        System.out.println("Opciones:\n\n 1. Cargar datos.\n 2. Imprimir repertorio.");
+        System.out.println("3. Buscar por título. 4. Buscar por autor");
         opcion = this.leer.nextInt();
-        if(opcion == 1){
-           System.out.println("Nombre del archivo: ");
-           String rutaArchivo = leer.next();
-            try {
-                this.servicio.cargarSoportes(rutaArchivo);
-            } catch (FileNotFoundException ex) {
-                System.out.println("El archivo especificado no existe");
-            } catch (LibroException ex) {
-                System.out.println(ex.getMessage());
-            }
+        
+        switch(opcion){
+            case 1:
+                System.out.println("Nombre del archivo: ");
+                String rutaArchivo = leer.next();
+                try {
+                    this.servicio.cargarSoportes(rutaArchivo);
+                } catch (FileNotFoundException ex) {
+                    System.out.println("El archivo especificado no existe");
+                } catch (LibroException ex) {
+                    System.out.println(ex.getMessage());
+                }
+                break;
+            case 2:
+                ArrayList<Soporte> soportes = this.servicio.getSoportes();
+                this.imprimirSoportes(soportes);
+                break;
+            case 3:
+                System.out.println("Título: ");
+                String titulo = leer.next();
+                Soporte soporte = servicio.busquedaPorTitulo(titulo);
+                System.out.println(soporte);
+                break;
+            case 4:
+                System.out.println("Nombre del autor");
+                String nombre = leer.next();
+                Soporte soporteB = servicio.busquedaPorAutor(nombre);
+                System.out.println(soporteB);
+                break;
+            default:
+                System.out.println("Opcion invalida");
         }
-        else if(opcion == 2){
-           ArrayList<Soporte> soportes = this.servicio.getSoportes();
-           this.imprimirSoportes(soportes);
-        }else{
-            System.out.println("Opcion invalida");
-        }
-    
     }
    
 }

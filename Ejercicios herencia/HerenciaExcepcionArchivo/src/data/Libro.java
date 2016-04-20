@@ -22,12 +22,10 @@ public class Libro extends Soporte{
         this.autor = autor;
     }
     
-    public String getIsbn() {
-        return isbn;
-    }
-
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
+    @Override
+    public Persona getAutor(String nombre){
+        
+        return autor;
     }
 
     @Override
@@ -36,7 +34,7 @@ public class Libro extends Soporte{
         String soporte = "Soporte: Libro\n\n";
         String titulo = super.toString();
         String numeroDePaginas = "Número de páginas: " + this.numeroDePaginas + "\n";
-        String autor = "Autor: " + this.autor + "\n";
+        String autor = "Autor: \n\n" + this.autor + "\n";
         
         return soporte + titulo + numeroDePaginas + autor;
     }
