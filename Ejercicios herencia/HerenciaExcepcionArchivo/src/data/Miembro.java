@@ -32,4 +32,8 @@ public class Miembro extends Persona{
         prestamos[numeroPrestamos] = prestamo;
         this.numeroPrestamos++;
     }
+
+    public Prestamo[] getPrestamos() {
+        return prestamos;
+    }
 }

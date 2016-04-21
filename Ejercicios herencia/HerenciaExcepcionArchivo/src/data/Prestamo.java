@@ -21,6 +21,14 @@ public class Prestamo {
         this.soporte = soporte;
         this.fecha = fecha;
     }
+
+    public String getSoporte() {
+        return soporte;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
     
     public Date fechaVencimiento(){
         

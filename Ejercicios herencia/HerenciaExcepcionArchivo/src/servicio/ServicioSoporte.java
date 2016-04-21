@@ -8,6 +8,7 @@ package servicio;
 import Exception.SoporteException;
 import dao.Dao;
 import data.Miembro;
+import data.Prestamo;
 import data.Soporte;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -93,8 +94,19 @@ public class ServicioSoporte {
    
    public String prestamosVencidos(){
        
-       for(Miembro miembro : miembro){
-           
+       String prestamosVencidos = "Préstamos vencidos:\n\n";
+       for(Miembro miembro : miembros){
+           Prestamo[] prestamos = miembro.getPrestamos();
+           for(int i = 0; i < 3; i++){
+               double dias = (prestamos[i].getFecha().getTime()-prestamos[i].fechaVencimiento().getTime())/(1000*60*60*24);
+               if(dias > 3){
+                   String cliente = "Cliente: " + miembro.getNombre() + "\n";
+                   String soporte = "Soporte: " + prestamos[i].getSoporte() + "\n";
+                   String fecha = "Fecha: " + prestamos[i].getFecha() + "\n\n";
+                   prestamosVencidos +=  cliente + soporte + fecha;
+               }
+           }
        }
+       return prestamosVencidos;
    }
 }

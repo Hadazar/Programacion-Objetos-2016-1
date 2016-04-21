@@ -45,10 +45,10 @@ public class UI {
     
     public void menu(){
         int opcion = 0;     
-        System.out.println("Bienvenido a la mediateca\n");
+        System.out.println("Bienvenido a la mediateca\n\n");
         System.out.println("Opciones:\n\n1. Cargar datos.\n2. Imprimir repertorio.");
         System.out.println("3. Buscar por título.\n4. Buscar por autor");
-        System.out.println("5. Cargar miembros.\n6. Prestamo");
+        System.out.println("5. Cargar miembros.\n6. Prestamo\n7. Listar prestamos vencidos.\n\n");
         opcion = this.leer.nextInt();
         
         switch(opcion){
@@ -105,6 +105,9 @@ public class UI {
                 }catch(PrestamoException e){
                     System.out.println(e.getMessage());
                 }
+            case 7:
+                String prestamos = servicio.prestamosVencidos();
+                System.out.println(prestamos);
             default:
                 System.out.println("Opcion invalida");
         }
