@@ -111,6 +111,7 @@ public class Dao {
     }
 	
     public ArrayList<Soporte> cargarSoportes(String archivo) throws FileNotFoundException, SoporteException{
+        
   	ArrayList<Soporte> soportes = new ArrayList<Soporte>();
 	Scanner leer = new Scanner(new File(archivo));
 	leer.useDelimiter(",");

@@ -24,6 +24,7 @@ public abstract class Soporte {
     }
 
     public abstract Persona getAutor(String nombre);
+    
     @Override
     public String toString() {
  

@@ -1,2 +1,2 @@
 CD,gozadera,regueton,60,2,juan,daza,emilce,daza,DVD,anabel,50,1,mario,benedeti,2,paula,bonilla,alejandra,gomez,Libro,dragon,54lm,50,dervi,castro,
-DVD,serpiente,150,1,alejandro,magno,2,camilo,cordoba,angie,susa,Libro,algebra,7h5k9,75,baldor,toricelli,CD,magdalena,regueton,5,1,alkilados,playa,
+DVD,serpiente,150,1,alejandro,magno,2,camilo,cordoba,angie,susa,Libro,algebra,7h5k9,75,baldor,toricelli,CD,magdalena,regueton,25,1,alkilados,playa,

@@ -16,6 +16,7 @@ public class Libro extends Soporte{
     private Persona autor;
 
     public Libro(String isbn, int numeroDePaginas, Persona autor, String titulo) {
+        
         super(titulo);
         this.isbn = isbn;
         this.numeroDePaginas = numeroDePaginas;

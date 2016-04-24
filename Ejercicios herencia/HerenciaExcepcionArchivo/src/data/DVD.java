@@ -41,6 +41,7 @@ public class DVD extends Soporte{
         return soporte + titulo + duracion + autores + actores;
     }
     
+    @Override
     public Persona getAutor(String nombre){
         
         Persona autor = null;

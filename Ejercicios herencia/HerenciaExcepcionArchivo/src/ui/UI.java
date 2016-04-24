@@ -105,9 +105,11 @@ public class UI {
                 }catch(PrestamoException e){
                     System.out.println(e.getMessage());
                 }
+                break;
             case 7:
                 String prestamos = servicio.prestamosVencidos();
                 System.out.println(prestamos);
+                break;
             default:
                 System.out.println("Opcion invalida");
         }

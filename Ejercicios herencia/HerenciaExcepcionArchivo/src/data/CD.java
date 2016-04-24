@@ -38,6 +38,7 @@ public class CD extends Soporte{
         return soporte + titulo + genero + duracion + musicos;
     }
     
+    @Override
     public Persona getAutor(String nombre){
         
         Persona autor = null;
