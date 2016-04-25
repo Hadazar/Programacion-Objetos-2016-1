@@ -5,6 +5,7 @@
  */
 package Ejecución;
 
+import Dao.Dao;
 import UI.UI;
 import java.util.Scanner;
 
@@ -24,7 +25,9 @@ public class Main {
             
                vista.menu();
                System.out.println("¿Desea continuar?\n\n1. Si\n2. No\n");
+               System.out.print("Opción: ");
                int opcion = scanner.nextInt();
+               System.out.println("");
                
                if(opcion != 1){
                   continuar = false;

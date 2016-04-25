@@ -30,7 +30,7 @@ public class Cash implements Asset{
     public String toString(){
         
         String cash = "Asset: Cash\n\n";
-        String amount = "Amount: " + this.amount + "\n";
+        String amount = "Amount: " + this.amount + "\n\n";
         
         return cash + amount;
     }

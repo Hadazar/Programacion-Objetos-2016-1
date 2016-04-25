@@ -34,7 +34,8 @@ public class Stock extends ShareAsset{
         String symbol = "Symbol: " + this.simbol + "\n";
         String totalCost = "Total cost: " + this.totalCost + "\n";
         String currentPrice = "Current price: " + this.CurrentPrice + "\n";
-        String totalShare = "Total share: " + this.totalShare + "\n";
+        String totalShare = "Total share: " + this.totalShare + "\n\n";
+        
         return cash + symbol + totalCost + currentPrice + totalShare;
     }
 }

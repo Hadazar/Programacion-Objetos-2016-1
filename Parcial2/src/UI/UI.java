@@ -39,11 +39,13 @@ public class UI {
     
     public void menu(){
         
-        int opcion = 0;
         System.out.println("Opciones:\n");
         System.out.println("1. Leer datos encriptados.\n2. Listar todos los asset.");
         System.out.println("3. Determinar el valor total en el mercado de todas las stock y divident stock de Google o samsumg");
-        System.out.println("4. Determinar el valor total y el beneficio total de los tipos de Asset");
+        System.out.println("4. Determinar el valor total y el beneficio total de los tipos de Asset\n");
+        System.out.print("Opción: ");
+        int opcion = archivo.nextInt();
+        System.out.println("");
         
         switch(opcion){
             

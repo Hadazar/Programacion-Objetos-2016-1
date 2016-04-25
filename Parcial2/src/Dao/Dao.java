@@ -28,8 +28,13 @@ public class Dao {
             
             char letraCifrada = palabra.charAt(i);
             int numeroCifrado = (int)letraCifrada - 65;
-            int numeroDecodificado = (numeroCifrado-7)%26 + 65;
-            char letraOriginal = (char)numeroDecodificado;
+            int numeroDecodificado = 0;
+            if(numeroCifrado < 7){
+                numeroDecodificado = (26 + (numeroCifrado-7));
+            }else{
+                numeroDecodificado = (numeroCifrado-7);
+            }
+            char letraOriginal = (char)(numeroDecodificado+65);
             palabraDescifrada += letraOriginal;
         }
         
@@ -38,7 +43,7 @@ public class Dao {
     
     public Cash leerCash(Scanner archivo){
         
-        double amount = archivo.nextDouble();
+        double amount = Double.parseDouble(archivo.next().trim());
         
         Cash cash = new Cash(amount);
         
@@ -49,8 +54,8 @@ public class Dao {
         
         String palabra = archivo.next().trim();
         String simbol = this.desifrarPalabra(palabra);
-        double totalCost = archivo.nextDouble();
-        double currentPrice = archivo.nextDouble();
+        double totalCost = Double.parseDouble(archivo.next().trim());
+        double currentPrice = Double.parseDouble(archivo.next().trim());
         int totalShare = archivo.nextInt();
         
         Stock stock = new Stock(totalShare, simbol, totalCost, currentPrice);
@@ -62,10 +67,10 @@ public class Dao {
         
         String palabra = archivo.next().trim();
         String simbol = this.desifrarPalabra(palabra);
-        double totalCost = archivo.nextDouble();
-        double currentPrice = archivo.nextDouble();
+        double totalCost = Double.parseDouble(archivo.next().trim());
+        double currentPrice = Double.parseDouble(archivo.next().trim());
         int totalShare = archivo.nextInt();
-        double dividents = archivo.nextDouble();
+        double dividents = Double.parseDouble(archivo.next().trim());
         
         DividentStock dividentStock = new DividentStock(dividents, totalShare, simbol, totalCost, currentPrice);
         
@@ -75,29 +80,29 @@ public class Dao {
         
         String palabra = archivo.next().trim();
         String tipo = this.desifrarPalabra(palabra);
-        Asset stuff = null;
+        Asset staff = null;
         
         if(tipo.equals("CASH")){
-            stuff = this.leerCash(archivo);
+            staff = this.leerCash(archivo);
         }else if(tipo.equals("STOCK")){
-            stuff = this.leerStock(archivo);
-        }else if(tipo.equals("DIVIDENTSTOCK")){
-            stuff = this.leerDividentStock(archivo);
+            staff = this.leerStock(archivo);
+        }else if(tipo.equals("DIVIDENT")){
+            staff = this.leerDividentStock(archivo);
         }
         
-        return stuff;
+        return staff;
     }
     
     public ArrayList<Asset> cargarArchivo(String rutaArchivo) throws FileNotFoundException{
         
-        ArrayList<Asset> stuffs = new ArrayList<Asset>();
+        ArrayList<Asset> staffs = new ArrayList<Asset>();
         Scanner archivo = new Scanner(new File(rutaArchivo));
         archivo.useDelimiter(",");
         
         while(archivo.hasNext()){
-            stuffs.add(this.leerStaff(archivo));
+            staffs.add(this.leerStaff(archivo));
         }
         
-        return stuffs;
+        return staffs;
     }
 }

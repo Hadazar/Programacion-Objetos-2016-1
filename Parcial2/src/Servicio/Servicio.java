@@ -21,12 +21,8 @@ public class Servicio {
     private Dao dao;
     private ArrayList<Asset> staffs;
 
-    public Servicio(Dao dao) {
-        this.dao = dao;
-    }
-
     public Servicio() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.dao = new Dao();
     }
     
     public void cargarAssets(String archivo) throws FileNotFoundException{
