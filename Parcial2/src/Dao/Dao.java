@@ -85,9 +85,9 @@ public class Dao {
         if(tipo.equals("CASH")){
             staff = this.leerCash(archivo);
         }else if(tipo.equals("STOCK")){
-            staff = this.leerStock(archivo);
-        }else if(tipo.equals("DIVIDENT")){
             staff = this.leerDividentStock(archivo);
+        }else if(tipo.equals("DIVSTOCK")){
+            staff = this.leerStock(archivo);
         }
         
         return staff;

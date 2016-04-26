@@ -39,11 +39,11 @@ public class Servicio {
         
         double valorMercado = 0;
         
-        for(Asset stuff : staffs){
+        for(Asset staff : staffs){
             
-            String clase = stuff.getClass().getName();
+            String clase = staff.getClass().getName();
             if(clase.equals("Stock") || clase.equals("DividentStock")){
-                Stock stock = (Stock)stuff;
+                Stock stock = (Stock)staff;
                 if(stock.getSimbol().equals("GOOGLE") || stock.getSimbol().equals("SAMSUMG")){
                     valorMercado += stock.getMarketValue();
                 }
@@ -59,10 +59,10 @@ public class Servicio {
         double valorTotalMercado = 0;
         double beneficioTotalMercado = 0;
         
-        for(Asset stuff : staffs){
+        for(Asset staff : staffs){
             
-            valorTotalMercado += stuff.getMarketValue();
-            beneficioTotalMercado += stuff.getProfit();
+            valorTotalMercado += staff.getMarketValue();
+            beneficioTotalMercado += staff.getProfit();
         }
         
         valorBeneficioTotalMercado[0] = valorTotalMercado;
