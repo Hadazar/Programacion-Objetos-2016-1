@@ -6,6 +6,8 @@
 package Servicios;
 
 import java.util.ArrayList;
+import redsocial.Comentario;
+import redsocial.Fotografia;
 import redsocial.Usuario;
 
 /**
@@ -42,14 +44,31 @@ public class RedSocial {
     public String imprimirUsuario(String nombre){
         
         Usuario usuario = this.buscarUsuario(nombre);
+        return usuario.toString();
     }
     public String listarComentarios(String nombre){
         
-        
+        Usuario usuario = this.buscarUsuario(nombre);
+        String listaComentarios = "Comentarios del usuario " + nombre + ":\n\n";
+        ArrayList<Comentario> comentarios = new ArrayList<Comentario>();
+        for(Comentario comentario : comentarios){
+            listaComentarios += comentario.toString() + "\n";
+        }
+        return listaComentarios;
     }
     
     public String listarFotos(String nombre){
         
+        String listaFotos = "Fotos en las que se encuentra " + nombre + ":\n\n";
+        
+        for(Usuario usuario : this.usuarios){ 
+            
+            ArrayList<Fotografia> fotos = new ArrayList<Fotografia>();
+            for(Fotografia foto : fotos){
+                listaFotos += foto.toString() + "\n";
+            }
+        }
+        return listaComentarios;
     }
     
     public String buscarComentarios(String palabra){

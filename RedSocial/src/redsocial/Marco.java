@@ -20,5 +20,14 @@ public class Marco {
         this.coordenadaY = coordenadaY;
         this.persona = persona;
     }
+
+    @Override
+    public String toString() {
+        
+        String persona = "Nombre: " + this.persona + "\n";
+        String coordenadas = "Aparece en la foto en la coordenadas: (" + this.coordenadaX + ", " + this.coordenadaY + ")\n";
+        return persona + coordenadas;
+    }
+    
     
 }

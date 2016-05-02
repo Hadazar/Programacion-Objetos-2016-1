@@ -44,4 +44,13 @@ public class Usuario extends Persona{
         
         return super.toString() + nick + clave;
     }
+
+    public ArrayList<Comentario> getComentarios() {
+        return comentarios;
+    }
+
+    public ArrayList<Fotografia> getFotos() {
+        return fotos;
+    }
+    
 }

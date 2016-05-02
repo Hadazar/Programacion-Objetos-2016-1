@@ -20,5 +20,14 @@ public class Comentario {
         this.texto = texto;
         this.fechaCreacion = fechaCreacion;
     }
+
+    @Override
+    public String toString() {
+        
+        String comentario = "Comentario: " + this.texto + "\n";
+        String fecha = "Fecha: " + this.fechaCreacion + "\n";
+        return comentario + fecha;
+    }
+    
     
 }

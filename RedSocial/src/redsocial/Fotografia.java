@@ -28,5 +28,17 @@ public class Fotografia {
             this.etiquetas.add(marco);
         }
     }
+
+    @Override
+    public String toString() {
+        
+        String nombre = "Nombre del archivo: " + this.nombre + "\n";
+        String descripcion = "Descripción: " + this.descripcion + "\n";
+        String string = nombre + descripcion + "Personas que aparecen:\n\n";
+        for(Marco marco : this.etiquetas){
+            string += marco.toString() + "\n";
+        }
+        return string;
+    }
     
 }
