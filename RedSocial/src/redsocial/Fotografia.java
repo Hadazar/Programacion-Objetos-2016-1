@@ -40,5 +40,9 @@ public class Fotografia {
         }
         return string;
     }
+
+    public ArrayList<Marco> getEtiquetas() {
+        return etiquetas;
+    }
     
 }

@@ -28,6 +28,9 @@ public class Marco {
         String coordenadas = "Aparece en la foto en la coordenadas: (" + this.coordenadaX + ", " + this.coordenadaY + ")\n";
         return persona + coordenadas;
     }
-    
+
+    public Persona getPersona() {
+        return persona;
+    }
     
 }

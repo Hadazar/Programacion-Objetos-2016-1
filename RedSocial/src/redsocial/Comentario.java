@@ -28,6 +28,9 @@ public class Comentario {
         String fecha = "Fecha: " + this.fechaCreacion + "\n";
         return comentario + fecha;
     }
-    
+
+    public String getTexto() {
+        return texto;
+    }
     
 }
