@@ -25,14 +25,9 @@ public class Main {
     public static void main(String[] args) {
         
         JFrame ventana = new JFrame();
-        JButton botonParar = new JButton("Parar");
-        
-        JButton botonContinuar = new JButton("Continuar");
         ventana.setSize(new Dimension(1500, 900));
         ventana.setTitle("Animación Automóvil");
-        ventana.add(new CarroPanel(), BorderLayout.CENTER);
-        ventana.add(botonParar, BorderLayout.SOUTH);
-        ventana.add(botonContinuar, BorderLayout.NORTH);
+        ventana.add(new CarroPanel());
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ventana.setVisible(true);
     }

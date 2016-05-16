@@ -5,6 +5,7 @@
  */
 package carro;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -20,44 +21,34 @@ import javax.swing.Timer;
  */
 public class CarroPanel extends JPanel implements ActionListener{
 
-    private int x;
-    private int y;
-    private int dx;
     private Timer timer;
+    private JButton continuar;
+    private JButton detener;
+    private Carro carro;
 
     public CarroPanel() {
-        this.x = 0;
-        this.y = 250;
-        this.dx = 5;
-        this.timer = new Timer(10, this);
+        
+        this.carro = new Carro();
+        this.timer = new Timer(10, this.carro);
         this.timer.start();
-        
-    }
-    
-    @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        
-        g.setColor(new Color(0, 191, 255));
-        int[] xPoints = {x + 100, x + 200, x + 300, x + 400};
-        int[] yPoints = {y + 200, y + 100, y + 100, y + 200};
-        g.fillPolygon(xPoints, yPoints, 4);
-        g.setColor(new Color(129, 208, 230));
-        g.fillRect(x, y + 200, 500, 100);
-        g.setColor(Color.BLACK);
-        g.drawRect(x, y + 200, 500, 100);
-        g.fillOval(x + 100, y + 300, 100, 100);
-        g.fillOval(x + 300, y + 300, 100, 100);
+        this.continuar = new JButton("Continuar");
+        this.detener = new JButton("Detener");
+        this.continuar.addActionListener(this);
+        this.detener.addActionListener(this);
+        setLayout(new BorderLayout());
+        add(this.carro, BorderLayout.CENTER);
+        add(this.continuar, BorderLayout.NORTH);
+        add(this.detener, BorderLayout.SOUTH);
     }
     
     @Override
     public void actionPerformed(ActionEvent e) {
         
-        x += dx;
-        if (x == 1000){
-        x = 0;
+        if(e.getSource() == this.continuar){
+            this.timer.start();
+        }else if(e.getSource() == this.detener){
+            this.timer.stop();
         }
-        repaint();
     }
     
 }
