@@ -9,13 +9,15 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import javax.swing.JPanel;
 
 /**
  *
  * @author HéctorAugusto
  */
-public class Carro extends JPanel implements ActionListener{
+public class Carro extends JPanel implements ActionListener, KeyListener{
     
     private int x;
     private int y;
@@ -26,6 +28,8 @@ public class Carro extends JPanel implements ActionListener{
         this.x = 0;
         this.y = 250;
         this.dx = 5;
+        setFocusable(true);
+        addKeyListener(this);
     }
     
     public void paintComponent(Graphics g){
@@ -52,5 +56,36 @@ public class Carro extends JPanel implements ActionListener{
             x = 0;
         }
         repaint();
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+       
+        switch(e.getKeyCode()){
+            case KeyEvent.VK_DOWN:
+                dx -= 5;
+                break;
+            case KeyEvent.VK_UP:
+                dx += 5;
+                break;
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        
+        switch(e.getKeyCode()){
+            case KeyEvent.VK_DOWN:
+                dx -= 5;
+                break;
+            case KeyEvent.VK_UP:
+                dx += 5;
+                break;
+        }
     }
 }
