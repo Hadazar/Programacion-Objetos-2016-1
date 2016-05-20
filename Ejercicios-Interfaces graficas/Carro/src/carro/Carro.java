@@ -17,7 +17,7 @@ import javax.swing.JPanel;
  *
  * @author HéctorAugusto
  */
-public class Carro extends JPanel implements ActionListener, KeyListener{
+public class Carro extends JPanel implements ActionListener{
     
     private int x;
     private int y;
@@ -28,8 +28,14 @@ public class Carro extends JPanel implements ActionListener, KeyListener{
         this.x = 0;
         this.y = 250;
         this.dx = 5;
-        setFocusable(true);
-        addKeyListener(this);
+    }
+
+    public void setDx(int dx) {
+        
+        this.dx += dx;
+        if(this.dx < 0){
+            this.dx = 0;
+        }
     }
     
     public void paintComponent(Graphics g){
@@ -52,40 +58,9 @@ public class Carro extends JPanel implements ActionListener, KeyListener{
     public void actionPerformed(ActionEvent e) {
         
         x += dx;
-        if (x == 1000){
+        if (x >= 1000){
             x = 0;
         }
         repaint();
-    }
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-        
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-       
-        switch(e.getKeyCode()){
-            case KeyEvent.VK_DOWN:
-                dx -= 5;
-                break;
-            case KeyEvent.VK_UP:
-                dx += 5;
-                break;
-        }
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        
-        switch(e.getKeyCode()){
-            case KeyEvent.VK_DOWN:
-                dx -= 5;
-                break;
-            case KeyEvent.VK_UP:
-                dx += 5;
-                break;
-        }
     }
 }

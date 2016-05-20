@@ -10,6 +10,10 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
@@ -19,11 +23,10 @@ import javax.swing.Timer;
  *
  * @author HéctorAugusto
  */
-public class CarroPanel extends JPanel implements ActionListener{
+public class CarroPanel extends JPanel implements MouseListener, KeyListener{
 
     private Timer timer;
-    private JButton continuar;
-    private JButton detener;
+    private JButton continuarDetener;
     private Carro carro;
 
     public CarroPanel() {
@@ -31,24 +34,61 @@ public class CarroPanel extends JPanel implements ActionListener{
         this.carro = new Carro();
         this.timer = new Timer(10, this.carro);
         this.timer.start();
-        this.continuar = new JButton("Continuar");
-        this.detener = new JButton("Detener");
-        this.continuar.addActionListener(this);
-        this.detener.addActionListener(this);
+        this.continuarDetener = new JButton("Continuar/Detener");
+        this.continuarDetener.addMouseListener(this);
         setLayout(new BorderLayout());
         add(this.carro, BorderLayout.CENTER);
-        add(this.continuar, BorderLayout.NORTH);
-        add(this.detener, BorderLayout.SOUTH);
+        add(this.continuarDetener, BorderLayout.NORTH);
+        addKeyListener(this);
+        setFocusable(true);
     }
     
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void mouseClicked(MouseEvent e) {
         
-        if(e.getSource() == this.continuar){
-            this.timer.start();
-        }else if(e.getSource() == this.detener){
-            this.timer.stop();
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        this.timer.stop();
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        this.timer.start();
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        
+        if(e.getKeyCode() == KeyEvent.VK_UP){
+            
+            this.carro.setDx(2);
         }
+        if(e.getKeyCode() == KeyEvent.VK_DOWN){
+            
+            this.carro.setDx(-2);
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        
     }
     
 }
