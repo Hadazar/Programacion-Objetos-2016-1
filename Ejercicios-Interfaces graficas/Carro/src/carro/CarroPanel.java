@@ -10,6 +10,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -23,7 +25,7 @@ import javax.swing.Timer;
  *
  * @author HéctorAugusto
  */
-public class CarroPanel extends JPanel implements MouseListener, KeyListener{
+public class CarroPanel extends JPanel implements MouseListener, KeyListener, FocusListener{
 
     private Timer timer;
     private JButton continuarDetener;
@@ -50,11 +52,13 @@ public class CarroPanel extends JPanel implements MouseListener, KeyListener{
 
     @Override
     public void mousePressed(MouseEvent e) {
+        
         this.timer.stop();
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
+        
         this.timer.start();
     }
 
@@ -91,4 +95,12 @@ public class CarroPanel extends JPanel implements MouseListener, KeyListener{
         
     }
     
+    public void focusLost(FocusEvent e){
+        
+        this.carro.setFocusable(true);
+    }
+    
+    public void focusGained(FocusEvent e){
+        
+    }
 }

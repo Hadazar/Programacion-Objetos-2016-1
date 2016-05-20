@@ -21,7 +21,7 @@ public class Main {
         
         JFrame ventana = new JFrame();
         ventana.setTitle("Animacion HangMan");
-        ventana.setSize(new Dimension(1200, 900));
+        ventana.setSize(new Dimension(1500, 900));
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ventana.add(new HangManPanel());
         ventana.setVisible(true);
