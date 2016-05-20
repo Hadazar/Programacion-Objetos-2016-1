@@ -25,7 +25,7 @@ import javax.swing.Timer;
  *
  * @author HéctorAugusto
  */
-public class CarroPanel extends JPanel implements MouseListener, KeyListener, FocusListener{
+public class CarroPanel extends JPanel implements MouseListener, KeyListener{
 
     private Timer timer;
     private JButton continuarDetener;
@@ -54,12 +54,14 @@ public class CarroPanel extends JPanel implements MouseListener, KeyListener, Fo
     public void mousePressed(MouseEvent e) {
         
         this.timer.stop();
+        this.continuarDetener.setFocusable(false);
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
         
         this.timer.start();
+        this.continuarDetener.setFocusable(false);
     }
 
     @Override
@@ -92,15 +94,6 @@ public class CarroPanel extends JPanel implements MouseListener, KeyListener, Fo
 
     @Override
     public void keyReleased(KeyEvent e) {
-        
-    }
-    
-    public void focusLost(FocusEvent e){
-        
-        this.carro.setFocusable(true);
-    }
-    
-    public void focusGained(FocusEvent e){
         
     }
 }
