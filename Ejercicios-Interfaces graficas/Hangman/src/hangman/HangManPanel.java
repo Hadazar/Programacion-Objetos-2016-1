@@ -35,6 +35,8 @@ public class HangManPanel extends JPanel implements ActionListener, KeyListener{
         this.timer = new Timer(1, this);
         this.timer.start();
         this.avanzar = true;
+        addKeyListener(this);
+        setFocusable(true);
     }
     
     public int[] calculoPosicion(double hipotenusa, double angulo){
@@ -109,6 +111,25 @@ public class HangManPanel extends JPanel implements ActionListener, KeyListener{
     @Override
     public void keyPressed(KeyEvent e) {
         
+        if(e.getKeyCode() == KeyEvent.VK_UP){
+            
+            this.variacion += 1;
+        }
+        if(e.getKeyCode() == KeyEvent.VK_DOWN){
+            
+            this.variacion -= 1;
+            if(this.variacion < 0){
+                this.variacion = 0;
+            }
+        }
+        if(e.getKeyCode() == KeyEvent.VK_S){
+            
+            this.timer.stop();
+        }
+        if(e.getKeyCode() == KeyEvent.VK_R){
+            
+            this.timer.start();
+        }
     }
 
     @Override
