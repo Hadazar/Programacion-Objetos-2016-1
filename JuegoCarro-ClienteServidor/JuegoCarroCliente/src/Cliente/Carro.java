@@ -83,6 +83,6 @@ public class Carro {
     
      public Rectangle siluetaColision(){
          
-       return new Rectangle(x, y, 20, 20);
+       return new Rectangle(x, y + 10, 50, 30);
     }
 }

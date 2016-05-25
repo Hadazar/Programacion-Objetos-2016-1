@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Servidor;
+package Cliente;
 
 import java.awt.Dimension;
 import java.io.IOException;
+import java.util.Scanner;
 import javax.swing.JFrame;
 
 /**
@@ -21,7 +22,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         
         JFrame ventana = new JFrame();
-        ventana.setTitle("Juego de carros (Servidor)");
+        ventana.setTitle("Juego de carros (cliente) : Jugador 2");
         ventana.setSize(new Dimension(600,600));
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ventana.add(new Tablero());

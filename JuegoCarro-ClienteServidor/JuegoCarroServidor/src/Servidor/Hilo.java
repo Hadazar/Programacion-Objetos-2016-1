@@ -20,15 +20,18 @@ public class Hilo implements Runnable{
     
     private Socket cliente; 
     private DataInputStream entrada;
+    private DataOutputStream salida;
     private Carro carro;
 
-    public Hilo(Socket cliente, Carro carro) throws IOException {
+    public Hilo(Socket cliente, Carro carro, DataOutputStream salida) throws IOException {
         
         this.cliente = cliente;
         this.carro = carro;
         this.entrada = new DataInputStream(this.cliente.getInputStream());
-    }
+        this.salida = salida;
 
+    }
+    
     @Override
     public void run() {
         
@@ -37,6 +40,7 @@ public class Hilo implements Runnable{
             try {
                 
                 int entrada = this.entrada.readInt();
+                this.salida.writeInt(entrada);
                 switch (entrada) {
                     
                     case 1: 

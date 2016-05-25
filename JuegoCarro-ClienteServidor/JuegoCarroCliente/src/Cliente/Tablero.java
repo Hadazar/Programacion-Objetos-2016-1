@@ -43,18 +43,24 @@ public class Tablero extends JPanel implements ActionListener, KeyListener{
         this.setFocusable(true);
         this.addKeyListener(this);
             
-        this.carro = new Carro(50,500);
-        this.carro2 = new Carro(500,500);
+        this.carro = new Carro(300,500);
+        this.carro2 = new Carro(300,500);
         this.monedas = new ArrayList<Moneda>();
         
-        //Monedas aleatorias
-        int numeroAleatorio = (int)(Math.random()*30+5);
-        for(int i = 1; i <= numeroAleatorio; i++){
+        
+        for(int i = 0; i < 25; i++){
             
-            this.monedas.add(new Moneda((int)Math.random()*500,(int)Math.random()*500));
+            for(int j = 0; j < 25; j++){
+                
+                this.monedas.add(new Moneda(j*20+50,i*20+50));
+            }
         }
         
         this.cliente = new Socket("localhost",8000);
+        this.entrada = new DataInputStream(this.cliente.getInputStream());
+        this.salida = new DataOutputStream(this.cliente.getOutputStream());
+        Thread hilo = new Thread(new Hilo(entrada,carro2));
+        hilo.start();
         this.timer = new Timer(50, this);
         this.timer.start();
         
@@ -71,8 +77,19 @@ public class Tablero extends JPanel implements ActionListener, KeyListener{
                 moneda.dibujar(g,this);
              }
              
-             g.drawString("Puntuacion Jugador 1: " + puntaje, 30, 30);
-             g.drawString("Puntuacion Jugador 2: " + puntaje2, 30, 470);
+             g.drawString("Puntuacion Jugador 1: " + this.puntaje, 30, 30);
+             g.drawString("Puntuacion Jugador 2: " + this.puntaje2, 420, 30);
+             
+             if(this.monedas.isEmpty()){
+                 
+                 if(this.puntaje > this.puntaje2){
+                     g.drawString("Gana jugador 1!", 270, 30);
+                 }else if(this.puntaje == this.puntaje2){
+                     g.drawString("Empate!", 270, 30);
+                 }else{
+                     g.drawString("Gana jugador 2!", 270, 30);
+                 }
+             }
         }
     
     public void Colision(){

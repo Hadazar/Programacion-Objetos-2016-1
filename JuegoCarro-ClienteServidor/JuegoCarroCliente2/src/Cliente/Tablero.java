@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Cliente2;
+package Cliente;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -17,6 +17,8 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -24,12 +26,12 @@ import javax.swing.Timer;
  *
  * @author HéctorAugusto
  */
-public class Tablero  extends JPanel implements ActionListener, KeyListener{
-    
+public class Tablero extends JPanel implements ActionListener, KeyListener{
+
     private Timer timer; 
     private ArrayList<Moneda> monedas;
     private Carro carro;
-    private Carro2 carro2;
+    private Carro carro2;
     private Socket cliente;
     private DataInputStream entrada;
     private DataOutputStream salida;
@@ -38,24 +40,30 @@ public class Tablero  extends JPanel implements ActionListener, KeyListener{
 
     public Tablero() throws IOException {
         
-        this.addKeyListener(this);
         this.setFocusable(true);
-        
-        this.carro = new Carro(50,500);
-        this.carro2 = new Carro2(500,500);
+        this.addKeyListener(this);
+            
+        this.carro = new Carro(300,500);
+        this.carro2 = new Carro(300,500);
         this.monedas = new ArrayList<Moneda>();
         
-        //Monedas aleatorias
-        int numeroAleatorio = (int)(Math.random()*30+5);
-        for(int i = 1; i <= numeroAleatorio; i++){
+        
+        for(int i = 0; i < 25; i++){
             
-            this.monedas.add(new Moneda((int)Math.random()*500,(int)Math.random()*500));
+            for(int j = 0; j < 25; j++){
+                
+                this.monedas.add(new Moneda(j*20+50,i*20+50));
+            }
         }
         
-        this.cliente=new Socket("localhost",8000);
-        this.salida = new DataOutputStream(cliente.getOutputStream());
+        this.cliente = new Socket("localhost",8000);
+        this.entrada = new DataInputStream(this.cliente.getInputStream());
+        this.salida = new DataOutputStream(this.cliente.getOutputStream());
+        Thread hilo = new Thread(new Hilo(entrada,carro2));
+        hilo.start();
         this.timer = new Timer(50, this);
         this.timer.start();
+        
     }
     
     public void paintComponent(Graphics g) {
@@ -69,8 +77,19 @@ public class Tablero  extends JPanel implements ActionListener, KeyListener{
                 moneda.dibujar(g,this);
              }
              
-             g.drawString("Puntuacion Jugador 1: " + puntaje, 30, 30);
-             g.drawString("Puntuacion Jugador 1: " + puntaje2, 30, 470);
+             g.drawString("Puntuacion Jugador 1: " + this.puntaje, 30, 30);
+             g.drawString("Puntuacion Jugador 2: " + this.puntaje2, 420, 30);
+             
+             if(this.monedas.isEmpty()){
+                 
+                 if(this.puntaje > this.puntaje2){
+                     g.drawString("Gana jugador 1!", 270, 30);
+                 }else if(this.puntaje == this.puntaje2){
+                     g.drawString("Empate!", 270, 30);
+                 }else{
+                     g.drawString("Gana jugador 2!", 270, 30);
+                 }
+             }
         }
     
     public void Colision(){
@@ -85,20 +104,25 @@ public class Tablero  extends JPanel implements ActionListener, KeyListener{
            if(siluetaCarro.intersects(siluetaMoneda)){
                
                clone.remove(moneda);
-               this.puntaje++;
+               this.puntaje2++;
            }
            if(siluetaCarro2.intersects(siluetaMoneda)){
                
                clone.remove(moneda);
-               this.puntaje2++;
+               this.puntaje++;
            }
            this.monedas = clone;   
         }
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
         
+        this.Colision();
+        for(Moneda moneda: this.monedas){
+           moneda.girar();
+           repaint();
+        }
     }
 
     @Override
@@ -109,11 +133,37 @@ public class Tablero  extends JPanel implements ActionListener, KeyListener{
     @Override
     public void keyPressed(KeyEvent e) {
         
+        int movimiento=-1;
+        try {
+            
+            int tecla = e.getKeyCode();
+            if (tecla == KeyEvent.VK_SPACE) {
+                movimiento=1;
+            }
+            if (tecla == KeyEvent.VK_LEFT) {
+                movimiento=1;
+            }
+            if (tecla == KeyEvent.VK_RIGHT) {
+               movimiento=2;
+            }
+            if (tecla == KeyEvent.VK_UP) {
+               movimiento=3;
+            }
+            if (tecla == KeyEvent.VK_DOWN) {
+               movimiento=4;
+        }
+        
+         this.carro.keyPressed(e);
+         this.salida.writeInt(movimiento);
+         this.salida.flush();
+        } catch (IOException ex) {
+            Logger.getLogger(Tablero.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
         
+        
     }
-    
 }

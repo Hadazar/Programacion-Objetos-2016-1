@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Cliente2;
+package Cliente;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -17,6 +17,7 @@ import javax.swing.JPanel;
  * @author HéctorAugusto
  */
 public class Moneda {
+    
     private int x;
     private int y;
     private Image imagen;
@@ -30,12 +31,6 @@ public class Moneda {
          this.imagen = cargarImagen("FullCoins.png");
     }
     
-    public Moneda(){
-        
-       this.x=20;
-       this.y=20;
-    }
-    
     public void dibujar(Graphics g, JPanel panel){
         
        g.setColor(Color.BLUE);
@@ -43,23 +38,21 @@ public class Moneda {
     
     }
     
-    
     protected Image cargarImagen(String nombreImagen) {
         
        ImageIcon img = new ImageIcon(nombreImagen);
-       Image imagen = img.getImage();
-       return imagen;
+        Image imagen = img.getImage();
+         return imagen;
     }
-    
-   
     
     public void girar(){
         
        if(this.numeroImagen==8){
-         this.numeroImagen =0;
+           this.numeroImagen =0;
        }
-       else       
+       else{
            this.numeroImagen++;
+       }
     }
     
     public Rectangle siluetaColision(){

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Cliente2;
+package Cliente;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -15,15 +15,28 @@ import javax.swing.JPanel;
  *
  * @author HéctorAugusto
  */
-public class Carro2 {
-     
+public class Carro {
+    
     private int x;
     private int y;
-
-    public Carro2(int x, int y) {
+    //Referencias para colores aleatorios
+    private int red;
+    private int green;
+    private int blue;
+    private int red2;
+    private int green2;
+    private int blue2;
+    
+    public Carro(int x, int y) {
         
         this.x = x;
         this.y = y;
+        this.red = (int)(Math.random()*250);
+        this.green = (int)(Math.random()*250);
+        this.blue = (int)(Math.random()*250);
+        this.red2 = (int)(Math.random()*250);
+        this.green2 = (int)(Math.random()*250);
+        this.blue2 = (int)(Math.random()*250);
     }
     
     public void setX(int x) {
@@ -43,12 +56,13 @@ public class Carro2 {
     }
     
     public void dibujar(Graphics g, JPanel panel){
-       
-        g.setColor(new Color(50, 10, 200));
+        
+        g.setColor(new Color(red, green, blue));
         int[] xPoints = {x + 10, x + 20, x + 30, x + 40};
         int[] yPoints = {y + 20, y + 10, y + 10, y + 20};
         g.fillPolygon(xPoints, yPoints, 4);
-        g.setColor(new Color(200, 100, 25));
+        
+        g.setColor(new Color(red2, green2, blue2));
         g.fillRect(x, y + 20, 50, 10);
         g.setColor(Color.BLACK);
         g.drawRect(x, y + 20, 50, 10);
@@ -69,6 +83,6 @@ public class Carro2 {
     
      public Rectangle siluetaColision(){
          
-       return new Rectangle(x, y, 20, 20);
+       return new Rectangle(x, y + 10, 50, 30);
     }
 }
