@@ -47,6 +47,7 @@ public class Tablero extends JPanel implements ActionListener{
         this.carro2 = new Carro(300,500);
         this.monedas = new ArrayList<Moneda>();
         
+        this.monedas.add(new Moneda(-1000,-1000));
         for(int i = 0; i < 25; i++){
             
             for(int j = 0; j < 25; j++){
@@ -79,6 +80,7 @@ public class Tablero extends JPanel implements ActionListener{
              this.carro.dibujar(g,this);
              this.carro2.dibujar(g,this);
              
+             
              for(Moneda moneda: this.monedas){
                 moneda.dibujar(g,this);
              }
@@ -86,14 +88,14 @@ public class Tablero extends JPanel implements ActionListener{
              g.drawString("Puntuacion Jugador 1: " + this.puntaje, 30, 30);
              g.drawString("Puntuacion Jugador 2: " + this.puntaje2, 420, 30);
              
-             if(this.monedas.isEmpty()){
+             if(this.monedas.size() == 1){
                  
                  if(this.puntaje > this.puntaje2){
-                     g.drawString("Gana jugador 1!", 270, 30);
+                     g.drawString("Gana jugador 1!", 270, 300);
                  }else if(this.puntaje == this.puntaje2){
-                     g.drawString("Empate!", 270, 30);
+                     g.drawString("Empate!", 270, 300);
                  }else{
-                     g.drawString("Gana jugador 2!", 270, 30);
+                     g.drawString("Gana jugador 2!", 270, 300);
                  }
              }
         }
@@ -111,11 +113,13 @@ public class Tablero extends JPanel implements ActionListener{
                
                clone.remove(moneda);
                this.puntaje++;
+               
            }
            if(siluetaCarro2.intersects(siluetaMoneda)){
                
                clone.remove(moneda);
                this.puntaje2++;
+               
            }
            this.monedas = clone;   
         }
@@ -126,7 +130,9 @@ public class Tablero extends JPanel implements ActionListener{
         
         this.Colision();
          for(Moneda moneda: this.monedas){
-            moneda.girar();
+            if(this.monedas.isEmpty() == false){
+                moneda.girar();
+            }
             repaint();
          }
     }

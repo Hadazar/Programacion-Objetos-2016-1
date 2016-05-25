@@ -27,7 +27,7 @@ public class Moneda {
         
         this.x = x;
         this.y = y;
-        this.numeroImagen =0;
+        this.numeroImagen = 0;
          this.imagen = cargarImagen("FullCoins.png");
     }
     
@@ -46,7 +46,7 @@ public class Moneda {
     }
     
     public void girar(){
-        
+       
        if(this.numeroImagen==8){
            this.numeroImagen =0;
        }
