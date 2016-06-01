@@ -25,11 +25,11 @@ public class Tablero extends JFrame {
     public boolean multijugador;
     private PrintStream salida;
 
-    public Tablero(boolean pMultijugador) {
+    public Tablero(boolean multijugador) {
         this.setTitle(("El juego - Felix El Gato Vs Sonic - Cliente"));
         this.setBackground(Color.LIGHT_GRAY);
         setLocationRelativeTo(null);
-        multijugador = pMultijugador;
+        this.multijugador = multijugador;
         iniciarComponentes();
         puntaje = new JLabel("");
         panelControl.setLayout(new BorderLayout());

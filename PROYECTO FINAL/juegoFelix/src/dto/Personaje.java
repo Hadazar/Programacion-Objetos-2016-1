@@ -25,14 +25,14 @@ public class Personaje extends JPanel {
     private Double puntaje;
     private boolean activo;
 
-    public Personaje(String NombrePersonaje, int PosicionX, int PosicionY, BufferedImage[] Imagenes, int CantidadDeMovimientos) {
+    public Personaje(String nombrePersonaje, int posicionX, int posicionY, BufferedImage[] imagenes, int cantidadDeMovimientos) {
         this.indiceImagenActual=0;
-        this.nombrePersonaje = NombrePersonaje;
-        this.posicionY = PosicionY;
-        this.posicionX = PosicionX;
-        this.imagenes = Imagenes;
-        this.cantidadDeMovimientos = CantidadDeMovimientos;
-        this.imagenActual= Imagenes[indiceImagenActual];
+        this.nombrePersonaje = nombrePersonaje;
+        this.posicionY = posicionY;
+        this.posicionX = posicionX;
+        this.imagenes = imagenes;
+        this.cantidadDeMovimientos = cantidadDeMovimientos;
+        this.imagenActual= imagenes[indiceImagenActual];
         this.controlTecla=0;
         this.puntaje=0.0;
         this.activo=true;

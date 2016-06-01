@@ -25,17 +25,17 @@ public class Personaje extends JPanel {
     private Double puntaje;
     private boolean activo;
 
-    public Personaje(String pNombrePersonaje, int pPosicionX, int pPosicionY, BufferedImage[] pImagenes, int pCantidadDeMovimientos) {
-        indiceImagenActual=0;
-        nombrePersonaje = pNombrePersonaje;
-        posicionY = pPosicionY;
-        posicionX = pPosicionX;
-        imagenes = pImagenes;
-        cantidadDeMovimientos = pCantidadDeMovimientos;
-        imagenActual=pImagenes[indiceImagenActual];
-        controlTecla=0;
-        puntaje=0.0;
-        activo=true;
+    public Personaje(String nombrePersonaje, int posicionX, int posicionY, BufferedImage[] imagenes, int cantidadDeMovimientos) {
+        this.indiceImagenActual=0;
+        this.nombrePersonaje = nombrePersonaje;
+        this.posicionY = posicionY;
+        this.posicionX = posicionX;
+        this.imagenes = imagenes;
+        this.cantidadDeMovimientos = cantidadDeMovimientos;
+        this.imagenActual=imagenes[indiceImagenActual];
+        this.controlTecla=0;
+        this.puntaje=0.0;
+        this.activo=true;
     }
 
     public BufferedImage[] getImagenes() {

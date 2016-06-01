@@ -28,15 +28,15 @@ public class MoverPersonaje extends Thread {
     public PuntajeRegistro puntajeRegistro;
     public String nombreJugador;
 
-    public MoverPersonaje(Personaje pPersonaje, Tablero pTablero, int pDificultad, boolean pMultijugador, String pNombreJugador) {
-        nombreJugador = pNombreJugador;
-        mensaje = false;
-        personaje = pPersonaje;
-        tablero = pTablero;
-        start = true;
-        aleatoreo = new Random();
-        dificultad = pDificultad;
-        multijugador = pMultijugador;
+    public MoverPersonaje(Personaje personaje, Tablero tablero, int dificultad, boolean multijugador, String nombreJugador) {
+        this.nombreJugador = nombreJugador;
+        this.mensaje = false;
+        this.personaje = personaje;
+        this.tablero = tablero;
+        this.start = true;
+        this.aleatoreo = new Random();
+        this.dificultad = dificultad;
+        this.multijugador = multijugador;
     }
 
     @Override
@@ -67,19 +67,19 @@ public class MoverPersonaje extends Thread {
         }
     }
 
-    public void enviarDatosServidor(String pReinicio) {
+    public void enviarDatosServidor(String reinicio) {
         if (multijugador) {
             tablero.enviarDatos("felix" + "-"
                     + tablero.panelControl.getFelix().getPosicionX() + "-" + tablero.panelControl.getFelix().getPosicionY() + "-" + tablero.panelControl.getFelix().getIndiceImagenActual()
                     + "-" + tablero.panelControl.getBomba().getPosicionX() + "-" + tablero.panelControl.getBomba().getPosicionY() + "-" + tablero.panelControl.getBomba().getIndiceImagenActual()
                     + "-" + tablero.panelControl.getVegeta().getPosicionX() + "-" + tablero.panelControl.getVegeta().getPosicionY() + "-" + tablero.panelControl.getVegeta().getIndiceImagenActual()
-                    + "-" + tablero.panelControl.getFelix().getPuntaje() + "-" + pReinicio);
+                    + "-" + tablero.panelControl.getFelix().getPuntaje() + "-" + reinicio);
         } else {
             tablero.enviarDatos("sonic" + "-"
                     + tablero.panelControl.getSonic().getPosicionX() + "-" + tablero.panelControl.getSonic().getPosicionY() + "-" + tablero.panelControl.getSonic().getIndiceImagenActual()
                     + "-" + tablero.panelControl.getBomba().getPosicionX() + "-" + tablero.panelControl.getBomba().getPosicionY() + "-" + tablero.panelControl.getBomba().getIndiceImagenActual()
                     + "-" + tablero.panelControl.getVegeta().getPosicionX() + "-" + tablero.panelControl.getVegeta().getPosicionY() + "-" + tablero.panelControl.getVegeta().getIndiceImagenActual()
-                    + "-" + tablero.panelControl.getSonic().getPuntaje() + "-" + pReinicio);
+                    + "-" + tablero.panelControl.getSonic().getPuntaje() + "-" + reinicio);
         }
     }
 
@@ -134,12 +134,12 @@ public class MoverPersonaje extends Thread {
     public void saltar() {
         personaje.setIndiceImagenActual(personaje.getCantidadDeMovimientos() - 2);
         for (int i = 0; i < 15; i++) {
-            esperarXsegundos(1);
+            esperarXSegundos(1);
             personaje.setPosicionY(personaje.getPosicionY() - i);
             tablero.repaint();
         }
         for (int i = 0; i < 15; i++) {
-            esperarXsegundos(1);
+            esperarXSegundos(1);
             personaje.setPosicionY(personaje.getPosicionY() + i);
             tablero.repaint();
         }
@@ -148,7 +148,7 @@ public class MoverPersonaje extends Thread {
 
     public void hacerCaminarArribaPersonaje() {
         for (int i = 1; i < personaje.getCantidadDeMovimientos() - 2; i++) {
-            esperarXsegundos(1);
+            esperarXSegundos(1);
             personaje.setIndiceImagenActual(i);
             if (validarLimitesPersonajes()) {
                 personaje.setPosicionY(personaje.getPosicionY() - 1);
@@ -159,7 +159,7 @@ public class MoverPersonaje extends Thread {
 
     public void hacerCaminarAbajoPersonaje() {
         for (int i = 1; i < personaje.getCantidadDeMovimientos() - 2; i++) {
-            esperarXsegundos(1);
+            esperarXSegundos(1);
             personaje.setIndiceImagenActual(i);
             if (validarLimitesPersonajes()) {
                 personaje.setPosicionY(personaje.getPosicionY() + 1);
@@ -170,7 +170,7 @@ public class MoverPersonaje extends Thread {
 
     public void caminar() {
         for (int i = 1; i < personaje.getCantidadDeMovimientos() - 2; i++) {
-            esperarXsegundos(1);
+            esperarXSegundos(1);
             personaje.setIndiceImagenActual(i);
             personaje.setPosicionX(personaje.getPosicionX() + 2);
             tablero.repaint();
@@ -179,7 +179,7 @@ public class MoverPersonaje extends Thread {
 
     public void vegetaCargando() {
         for (int i = 0; i < tablero.panelControl.getVegeta().getCantidadDeMovimientos() - 2; i++) {
-            esperarXsegundos(2);
+            esperarXSegundos(2);
             if ((tablero.panelControl.getFelix().isActivo() || tablero.panelControl.getSonic().isActivo()) && tablero.panelControl.getVegeta().isActivo()) {
                 tablero.panelControl.getVegeta().setIndiceImagenActual(i);
                 tablero.repaint();
@@ -203,7 +203,7 @@ public class MoverPersonaje extends Thread {
         tablero.repaint();
     }
 
-    public void esperarXsegundos(int segundos) {
+    public void esperarXSegundos(int segundos) {
         try {
             Thread.sleep(segundos * 30);
         } catch (InterruptedException ex) {

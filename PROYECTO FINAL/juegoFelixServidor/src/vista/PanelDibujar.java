@@ -63,10 +63,10 @@ public class PanelDibujar extends JPanel {
         }
     }
 
-    private BufferedImage[] cargarImagenes(String pNombrePersonaje, int pCantidadImagenes) {
+    private BufferedImage[] cargarImagenes(String nombrePersonaje, int cantidadImagenes) {
         try {
-            for (int i = 0; i < pCantidadImagenes; i++) {
-                url = new URL(getClass().getResource("/image/" + pNombrePersonaje + "S" + i + ".gif").toString());
+            for (int i = 0; i < cantidadImagenes; i++) {
+                url = new URL(getClass().getResource("/image/" + nombrePersonaje + "S" + i + ".gif").toString());
                 imagenes[i] = ImageIO.read(url);
             }
 
