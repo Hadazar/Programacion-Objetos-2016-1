@@ -14,15 +14,15 @@ import vista.Tablero;
  */
 public class JuegoFelix {
 
-    public String multijugador;
-    public String dificultad;
-    public int dificultadS;
-    public boolean multijugadorS;
-    public String nombreJugador;
-    public MoverPersonaje felix;
-    public MoverPersonaje sonic;
-    public MoverPersonaje m3;
-    public MoverPersonaje m4;
+    private String multijugador;
+    private String dificultad;
+    private int dificultadS;
+    private boolean multijugadorS;
+    private String nombreJugador;
+    private MoverPersonaje felix;
+    private MoverPersonaje sonic;
+    private MoverPersonaje m3;
+    private MoverPersonaje m4;
 
     public JuegoFelix() {
         multijugador = "";
@@ -95,18 +95,18 @@ public class JuegoFelix {
         Tablero tablero = new Tablero(multijugadorS);
         tablero.setVisible(true);
         if (multijugadorS) {
-            felix = new MoverPersonaje(tablero.panelControl.getFelix(), tablero, dificultadS, multijugadorS,nombreJugador);
-            tablero.panelControl.getSonic().setIndiceImagenActual(tablero.panelControl.getSonic().getCantidadDeMovimientos() - 1);
-            m3 = new MoverPersonaje(tablero.panelControl.getVegeta(), tablero, dificultadS, multijugadorS,nombreJugador);
-            m4 = new MoverPersonaje(tablero.panelControl.getBomba(), tablero, dificultadS, multijugadorS,nombreJugador);
+            felix = new MoverPersonaje(tablero.getPanelControl().getFelix(), tablero, dificultadS, multijugadorS,nombreJugador);
+            tablero.getPanelControl().getSonic().setIndiceImagenActual(tablero.getPanelControl().getSonic().getCantidadDeMovimientos() - 1);
+            m3 = new MoverPersonaje(tablero.getPanelControl().getVegeta(), tablero, dificultadS, multijugadorS,nombreJugador);
+            m4 = new MoverPersonaje(tablero.getPanelControl().getBomba(), tablero, dificultadS, multijugadorS,nombreJugador);
             felix.start();
             m3.start();
             m4.start();
         } else {
-            sonic = new MoverPersonaje(tablero.panelControl.getSonic(), tablero, dificultadS, multijugadorS,nombreJugador);
-            tablero.panelControl.getFelix().setIndiceImagenActual(tablero.panelControl.getFelix().getCantidadDeMovimientos() - 1);
-            m3 = new MoverPersonaje(tablero.panelControl.getVegeta(), tablero, dificultadS, multijugadorS,nombreJugador);
-            m4 = new MoverPersonaje(tablero.panelControl.getBomba(), tablero, dificultadS, multijugadorS,nombreJugador);
+            sonic = new MoverPersonaje(tablero.getPanelControl().getSonic(), tablero, dificultadS, multijugadorS,nombreJugador);
+            tablero.getPanelControl().getFelix().setIndiceImagenActual(tablero.getPanelControl().getFelix().getCantidadDeMovimientos() - 1);
+            m3 = new MoverPersonaje(tablero.getPanelControl().getVegeta(), tablero, dificultadS, multijugadorS,nombreJugador);
+            m4 = new MoverPersonaje(tablero.getPanelControl().getBomba(), tablero, dificultadS, multijugadorS,nombreJugador);
             sonic.start();
             m3.start();
             m4.start();

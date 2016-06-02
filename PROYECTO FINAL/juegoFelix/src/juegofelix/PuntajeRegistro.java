@@ -13,11 +13,11 @@ import java.util.Date;
  */
 public class PuntajeRegistro {
 
-    File archivo = null;
-    FileReader fr = null;
-    BufferedReader br = null;
-    FileWriter fichero = null;
-    PrintWriter pw = null;
+    private File archivo = null;
+    private FileReader fr = null;
+    private BufferedReader br = null;
+    private FileWriter fichero = null;
+    private PrintWriter pw = null;
 
     public void escrituraArchivo(String pAImprimir) {
 

@@ -47,19 +47,19 @@ public class MoverPersonaje extends Thread {
             control();
             actualizarPuntaje();
 
-            if ((verificarJuego() || validarVictoria()) && (!tablero.panelControl.getFelix().isActivo() && !tablero.panelControl.getSonic().isActivo())) {
+            if ((verificarJuego() || validarVictoria()) && (!tablero.getPanelControl().getFelix().isActivo() && !tablero.getPanelControl().getSonic().isActivo())) {
                 break;
             }
         }
         System.out.println(start + "-" + mensaje + "-" + personaje.getNombrePersonaje());
         if (!start && mensaje) {
             try {
-                if (personaje.getNombrePersonaje().equalsIgnoreCase("Felix") && multijugador && !tablero.panelControl.getFelix().isActivo()) {
+                if (personaje.getNombrePersonaje().equalsIgnoreCase("Felix") && multijugador && !tablero.getPanelControl().getFelix().isActivo()) {
                     vegetaVictorioso();
-                    acabarJuegoIniciar("Perdiste tu puntaje fue " + tablero.panelControl.getFelix().getPuntaje());
-                } else if (personaje.getNombrePersonaje().equalsIgnoreCase("Sonic") && !tablero.panelControl.getSonic().isActivo()) {
+                    acabarJuegoIniciar("Perdiste tu puntaje fue " + tablero.getPanelControl().getFelix().getPuntaje());
+                } else if (personaje.getNombrePersonaje().equalsIgnoreCase("Sonic") && !tablero.getPanelControl().getSonic().isActivo()) {
                     vegetaVictorioso();
-                    acabarJuegoIniciar("Perdiste tu puntaje fue " + tablero.panelControl.getSonic().getPuntaje());
+                    acabarJuegoIniciar("Perdiste tu puntaje fue " + tablero.getPanelControl().getSonic().getPuntaje());
                 }
             } catch (Throwable ex) {
                 System.err.println("Error al terminar los hilos, destruyalos de manera manual " + ex.getMessage());
@@ -70,16 +70,16 @@ public class MoverPersonaje extends Thread {
     public void enviarDatosServidor(String reinicio) {
         if (multijugador) {
             tablero.enviarDatos("felix" + "-"
-                    + tablero.panelControl.getFelix().getPosicionX() + "-" + tablero.panelControl.getFelix().getPosicionY() + "-" + tablero.panelControl.getFelix().getIndiceImagenActual()
-                    + "-" + tablero.panelControl.getBomba().getPosicionX() + "-" + tablero.panelControl.getBomba().getPosicionY() + "-" + tablero.panelControl.getBomba().getIndiceImagenActual()
-                    + "-" + tablero.panelControl.getVegeta().getPosicionX() + "-" + tablero.panelControl.getVegeta().getPosicionY() + "-" + tablero.panelControl.getVegeta().getIndiceImagenActual()
-                    + "-" + tablero.panelControl.getFelix().getPuntaje() + "-" + reinicio);
+                    + tablero.getPanelControl().getFelix().getPosicionX() + "-" + tablero.getPanelControl().getFelix().getPosicionY() + "-" + tablero.getPanelControl().getFelix().getIndiceImagenActual()
+                    + "-" + tablero.getPanelControl().getBomba().getPosicionX() + "-" + tablero.getPanelControl().getBomba().getPosicionY() + "-" + tablero.getPanelControl().getBomba().getIndiceImagenActual()
+                    + "-" + tablero.getPanelControl().getVegeta().getPosicionX() + "-" + tablero.getPanelControl().getVegeta().getPosicionY() + "-" + tablero.getPanelControl().getVegeta().getIndiceImagenActual()
+                    + "-" + tablero.getPanelControl().getFelix().getPuntaje() + "-" + reinicio);
         } else {
             tablero.enviarDatos("sonic" + "-"
-                    + tablero.panelControl.getSonic().getPosicionX() + "-" + tablero.panelControl.getSonic().getPosicionY() + "-" + tablero.panelControl.getSonic().getIndiceImagenActual()
-                    + "-" + tablero.panelControl.getBomba().getPosicionX() + "-" + tablero.panelControl.getBomba().getPosicionY() + "-" + tablero.panelControl.getBomba().getIndiceImagenActual()
-                    + "-" + tablero.panelControl.getVegeta().getPosicionX() + "-" + tablero.panelControl.getVegeta().getPosicionY() + "-" + tablero.panelControl.getVegeta().getIndiceImagenActual()
-                    + "-" + tablero.panelControl.getSonic().getPuntaje() + "-" + reinicio);
+                    + tablero.getPanelControl().getSonic().getPosicionX() + "-" + tablero.getPanelControl().getSonic().getPosicionY() + "-" + tablero.getPanelControl().getSonic().getIndiceImagenActual()
+                    + "-" + tablero.getPanelControl().getBomba().getPosicionX() + "-" + tablero.getPanelControl().getBomba().getPosicionY() + "-" + tablero.getPanelControl().getBomba().getIndiceImagenActual()
+                    + "-" + tablero.getPanelControl().getVegeta().getPosicionX() + "-" + tablero.getPanelControl().getVegeta().getPosicionY() + "-" + tablero.getPanelControl().getVegeta().getIndiceImagenActual()
+                    + "-" + tablero.getPanelControl().getSonic().getPuntaje() + "-" + reinicio);
         }
     }
 
@@ -178,28 +178,28 @@ public class MoverPersonaje extends Thread {
     }
 
     public void vegetaCargando() {
-        for (int i = 0; i < tablero.panelControl.getVegeta().getCantidadDeMovimientos() - 2; i++) {
+        for (int i = 0; i < tablero.getPanelControl().getVegeta().getCantidadDeMovimientos() - 2; i++) {
             esperarXSegundos(2);
-            if ((tablero.panelControl.getFelix().isActivo() || tablero.panelControl.getSonic().isActivo()) && tablero.panelControl.getVegeta().isActivo()) {
-                tablero.panelControl.getVegeta().setIndiceImagenActual(i);
+            if ((tablero.getPanelControl().getFelix().isActivo() || tablero.getPanelControl().getSonic().isActivo()) && tablero.getPanelControl().getVegeta().isActivo()) {
+                tablero.getPanelControl().getVegeta().setIndiceImagenActual(i);
                 tablero.repaint();
             }
         }
     }
 
     public void vegetaDerrotado() {
-        tablero.panelControl.getVegeta().setActivo(false);
-        tablero.panelControl.getVegeta().setIndiceImagenActual(tablero.panelControl.getVegeta().getCantidadDeMovimientos() - 1);
-        tablero.panelControl.getVegeta().setPosicionX(300);
-        tablero.panelControl.getBomba().setIndiceImagenActual(tablero.panelControl.getBomba().getCantidadDeMovimientos() - 1);
+        tablero.getPanelControl().getVegeta().setActivo(false);
+        tablero.getPanelControl().getVegeta().setIndiceImagenActual(tablero.getPanelControl().getVegeta().getCantidadDeMovimientos() - 1);
+        tablero.getPanelControl().getVegeta().setPosicionX(300);
+        tablero.getPanelControl().getBomba().setIndiceImagenActual(tablero.getPanelControl().getBomba().getCantidadDeMovimientos() - 1);
         tablero.repaint();
     }
 
     public void vegetaVictorioso() {
-        tablero.panelControl.getVegeta().setActivo(false);
-        tablero.panelControl.getVegeta().setIndiceImagenActual(tablero.panelControl.getVegeta().getCantidadDeMovimientos() - 2);
-        tablero.panelControl.getVegeta().setPosicionX(300);
-        tablero.panelControl.getBomba().setIndiceImagenActual(tablero.panelControl.getBomba().getCantidadDeMovimientos() - 1);
+        tablero.getPanelControl().getVegeta().setActivo(false);
+        tablero.getPanelControl().getVegeta().setIndiceImagenActual(tablero.getPanelControl().getVegeta().getCantidadDeMovimientos() - 2);
+        tablero.getPanelControl().getVegeta().setPosicionX(300);
+        tablero.getPanelControl().getBomba().setIndiceImagenActual(tablero.getPanelControl().getBomba().getCantidadDeMovimientos() - 1);
         tablero.repaint();
     }
 
@@ -231,7 +231,7 @@ public class MoverPersonaje extends Thread {
         personaje.setActivo(validarLimitesBomba());
 
         if (personaje.isActivo()) {
-            tablero.panelControl.getBomba().setPosicionX(personaje.getPosicionX() - 1);
+            tablero.getPanelControl().getBomba().setPosicionX(personaje.getPosicionX() - 1);
         }
         tablero.repaint();
     }
@@ -241,19 +241,19 @@ public class MoverPersonaje extends Thread {
      */
     public void adicionarPuntaje() {
         if (multijugador && start) {
-            if (tablero.panelControl.getFelix().isActivo()) {
-                tablero.panelControl.getFelix().setPuntaje(tablero.panelControl.getFelix().getPuntaje() + tablero.panelControl.getFelix().getPosicionX());
+            if (tablero.getPanelControl().getFelix().isActivo()) {
+                tablero.getPanelControl().getFelix().setPuntaje(tablero.getPanelControl().getFelix().getPuntaje() + tablero.getPanelControl().getFelix().getPosicionX());
             }
-        } else if (tablero.panelControl.getSonic().isActivo() && start) {
-            tablero.panelControl.getSonic().setPuntaje(tablero.panelControl.getSonic().getPuntaje() + tablero.panelControl.getSonic().getPosicionX());
+        } else if (tablero.getPanelControl().getSonic().isActivo() && start) {
+            tablero.getPanelControl().getSonic().setPuntaje(tablero.getPanelControl().getSonic().getPuntaje() + tablero.getPanelControl().getSonic().getPosicionX());
         }
     }
 
     public void actualizarPuntaje() {
-        if (tablero.panelControl.getFelix().isActivo() && multijugador) {
-            tablero.puntaje.setText("FELIX: " + tablero.panelControl.getFelix().getPuntaje().intValue());
-        } else if (tablero.panelControl.getSonic().isActivo() && !multijugador) {
-            tablero.puntaje.setText(" SONIC: " + tablero.panelControl.getSonic().getPuntaje().intValue());
+        if (tablero.getPanelControl().getFelix().isActivo() && multijugador) {
+            tablero.getPuntaje().setText("FELIX: " + tablero.getPanelControl().getFelix().getPuntaje().intValue());
+        } else if (tablero.getPanelControl().getSonic().isActivo() && !multijugador) {
+            tablero.getPuntaje().setText(" SONIC: " + tablero.getPanelControl().getSonic().getPuntaje().intValue());
         }
     }
 
@@ -264,14 +264,14 @@ public class MoverPersonaje extends Thread {
         if (mensaje.contains("Perdiste")) {
             estado = "Perdio";
         }
-        if (!tablero.panelControl.getFelix().isActivo() && multijugador) {
-            aGuardar = nombreJugador + " jugo con FELIX: " + tablero.panelControl.getFelix().getPuntaje().intValue();
+        if (!tablero.getPanelControl().getFelix().isActivo() && multijugador) {
+            aGuardar = nombreJugador + " jugo con FELIX: " + tablero.getPanelControl().getFelix().getPuntaje().intValue();
             puntajeRegistro = new PuntajeRegistro();
             puntajeRegistro.escrituraArchivo(aGuardar + " - " + estado);
             eleccion = JOptionPane.showConfirmDialog(null, mensaje + ", quieres volver a intentarlo ?");
             decisionJuego(eleccion);
-        } else if (!tablero.panelControl.getSonic().isActivo() && !multijugador) {
-            aGuardar = nombreJugador + " jugo con SONIC: " + tablero.panelControl.getSonic().getPuntaje().intValue();
+        } else if (!tablero.getPanelControl().getSonic().isActivo() && !multijugador) {
+            aGuardar = nombreJugador + " jugo con SONIC: " + tablero.getPanelControl().getSonic().getPuntaje().intValue();
             puntajeRegistro = new PuntajeRegistro();
             puntajeRegistro.escrituraArchivo(aGuardar + " - " + estado);
             eleccion = JOptionPane.showConfirmDialog(null, mensaje + ", quieres volver a intentarlo ?");
@@ -284,10 +284,10 @@ public class MoverPersonaje extends Thread {
     public void decisionJuego(int eleccion) {
         if (eleccion == JOptionPane.YES_OPTION) {
             enviarDatosServidor("si");
-            tablero.panelControl.getFelix().setActivo(false);
-            tablero.panelControl.getSonic().setActivo(false);
-            tablero.panelControl.getBomba().setActivo(false);
-            tablero.panelControl.getVegeta().setActivo(false);
+            tablero.getPanelControl().getFelix().setActivo(false);
+            tablero.getPanelControl().getSonic().setActivo(false);
+            tablero.getPanelControl().getBomba().setActivo(false);
+            tablero.getPanelControl().getVegeta().setActivo(false);
             mensaje = false;
             tablero.setVisible(false);
             juego = new JuegoFelix();
@@ -322,9 +322,9 @@ public class MoverPersonaje extends Thread {
         if (personaje.getPosicionX() >= 0) {
             return true;
         } else if (personaje.getPosicionX() < 0) {
-            tablero.panelControl.getBomba().setPosicionX(405);
+            tablero.getPanelControl().getBomba().setPosicionX(405);
             aleatoreoNumero = aleatoreo.nextDouble() * 70;
-            tablero.panelControl.getBomba().setPosicionY(375 - aleatoreoNumero.intValue());
+            tablero.getPanelControl().getBomba().setPosicionY(375 - aleatoreoNumero.intValue());
             adicionarPuntaje();
             return false;
         } else {
@@ -336,20 +336,20 @@ public class MoverPersonaje extends Thread {
         if (validarRangoBombaY() && validarRangoBombaX()) {
             personaje.setActivo(false);
             if (personaje.getNombrePersonaje().equalsIgnoreCase("felix")) {
-                tablero.panelControl.getFelix().setIndiceImagenActual(personaje.getCantidadDeMovimientos() - 1);
+                tablero.getPanelControl().getFelix().setIndiceImagenActual(personaje.getCantidadDeMovimientos() - 1);
             } else if (personaje.getNombrePersonaje().equalsIgnoreCase("sonic")) {
-                tablero.panelControl.getSonic().setIndiceImagenActual(personaje.getCantidadDeMovimientos() - 1);
+                tablero.getPanelControl().getSonic().setIndiceImagenActual(personaje.getCantidadDeMovimientos() - 1);
             }
             return true;
         }
 
         if (multijugador) {
-            if (!tablero.panelControl.getFelix().isActivo()) {
+            if (!tablero.getPanelControl().getFelix().isActivo()) {
                 start = false;
                 mensaje = true;
                 return true;
             }
-        } else if (!tablero.panelControl.getSonic().isActivo()) {
+        } else if (!tablero.getPanelControl().getSonic().isActivo()) {
             start = false;
             mensaje = true;
             return true;
@@ -358,7 +358,7 @@ public class MoverPersonaje extends Thread {
     }
 
     public boolean validarRangoBombaY() {
-        if (personaje.getPosicionY() >= tablero.panelControl.getBomba().getPosicionY() - 25 && personaje.getPosicionY() < tablero.panelControl.getBomba().getPosicionY() + 25) {
+        if (personaje.getPosicionY() >= tablero.getPanelControl().getBomba().getPosicionY() - 25 && personaje.getPosicionY() < tablero.getPanelControl().getBomba().getPosicionY() + 25) {
             return true;
         } else {
             return false;
@@ -366,7 +366,7 @@ public class MoverPersonaje extends Thread {
     }
 
     public boolean validarRangoBombaX() {
-        if (personaje.getPosicionX() >= tablero.panelControl.getBomba().getPosicionX() && personaje.getPosicionX() < tablero.panelControl.getBomba().getPosicionX() + 20) {
+        if (personaje.getPosicionX() >= tablero.getPanelControl().getBomba().getPosicionX() && personaje.getPosicionX() < tablero.getPanelControl().getBomba().getPosicionX() + 20) {
             return true;
         } else {
             return false;
@@ -375,17 +375,17 @@ public class MoverPersonaje extends Thread {
 
     public boolean validarVictoria() {
         if (multijugador) {
-            if (tablero.panelControl.getFelix().getPosicionX() > 450 && personaje.getNombrePersonaje().equalsIgnoreCase("Felix")) {
-                tablero.panelControl.getFelix().setActivo(false);
+            if (tablero.getPanelControl().getFelix().getPosicionX() > 450 && personaje.getNombrePersonaje().equalsIgnoreCase("Felix")) {
+                tablero.getPanelControl().getFelix().setActivo(false);
                 vegetaDerrotado();
-                acabarJuegoIniciar("Ganaste tu puntaje fue " + tablero.panelControl.getFelix().getPuntaje());
+                acabarJuegoIniciar("Ganaste tu puntaje fue " + tablero.getPanelControl().getFelix().getPuntaje());
                 return true;
             }
         } else {
-            if (tablero.panelControl.getSonic().getPosicionX() > 450 && personaje.getNombrePersonaje().equalsIgnoreCase("Sonic")) {
-                tablero.panelControl.getSonic().setActivo(false);
+            if (tablero.getPanelControl().getSonic().getPosicionX() > 450 && personaje.getNombrePersonaje().equalsIgnoreCase("Sonic")) {
+                tablero.getPanelControl().getSonic().setActivo(false);
                 vegetaDerrotado();
-                acabarJuegoIniciar("Ganaste tu puntaje fue " + tablero.panelControl.getSonic().getPuntaje());
+                acabarJuegoIniciar("Ganaste tu puntaje fue " + tablero.getPanelControl().getSonic().getPuntaje());
                 return true;
             }
         }

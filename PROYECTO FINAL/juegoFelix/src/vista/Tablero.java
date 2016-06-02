@@ -19,10 +19,10 @@ import javax.swing.JLabel;
 
 public class Tablero extends JFrame {
 
-    public PanelDibujar panelControl;
-    public JLabel puntaje;
+    private PanelDibujar panelControl;
+    private JLabel puntaje;
     private Socket cliente;
-    public boolean multijugador;
+    private boolean multijugador;
     private PrintStream salida;
 
     public Tablero(boolean multijugador) {
@@ -132,4 +132,14 @@ public class Tablero extends JFrame {
             Logger.getLogger(Tablero.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public PanelDibujar getPanelControl() {
+        return panelControl;
+    }
+
+    public JLabel getPuntaje() {
+        return puntaje;
+    }
+    
+    
 }
