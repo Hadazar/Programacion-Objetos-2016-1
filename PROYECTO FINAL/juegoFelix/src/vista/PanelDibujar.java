@@ -1,6 +1,5 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ 
  */
 package vista;
 
@@ -17,8 +16,9 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 /**
- *
- * @author
+ @Héctor Daza
+ @Andrés Iriarte
+ * 
  */
 public class PanelDibujar extends JPanel {
 

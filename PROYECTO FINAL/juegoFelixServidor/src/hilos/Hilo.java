@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package hilos;
 
 import java.io.BufferedReader;
@@ -11,6 +8,10 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import vista.Tablero;
+
+/*@Héctor Daza
+  @Andrés Iriarte
+*/
 
 public class Hilo implements Runnable {
 

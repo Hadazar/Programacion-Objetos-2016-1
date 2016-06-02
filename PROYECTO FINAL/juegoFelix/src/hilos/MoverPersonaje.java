@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package hilos;
 
 import dto.Personaje;
@@ -12,21 +8,22 @@ import juegofelix.PuntajeRegistro;
 import vista.Tablero;
 
 /**
- *
+ @Héctor Daza
+ @Andrés Iriarte
  *
  */
 public class MoverPersonaje extends Thread {
 
-    public Personaje personaje;
-    public Tablero tablero;
-    public Boolean start;
-    public Random aleatoreo;
-    public int dificultad;
-    public boolean multijugador;
-    public Boolean mensaje;
-    public JuegoFelix juego;
-    public PuntajeRegistro puntajeRegistro;
-    public String nombreJugador;
+    private Personaje personaje;
+    private Tablero tablero;
+    private Boolean start;
+    private Random aleatoreo;
+    private int dificultad;
+    private boolean multijugador;
+    private Boolean mensaje;
+    private JuegoFelix juego;
+    private PuntajeRegistro puntajeRegistro;
+    private String nombreJugador;
 
     public MoverPersonaje(Personaje personaje, Tablero tablero, int dificultad, boolean multijugador, String nombreJugador) {
         this.nombreJugador = nombreJugador;
@@ -51,7 +48,7 @@ public class MoverPersonaje extends Thread {
                 break;
             }
         }
-        System.out.println(start + "-" + mensaje + "-" + personaje.getNombrePersonaje());
+        //System.out.println(start + "-" + mensaje + "-" + personaje.getNombrePersonaje());
         if (!start && mensaje) {
             try {
                 if (personaje.getNombrePersonaje().equalsIgnoreCase("Felix") && multijugador && !tablero.getPanelControl().getFelix().isActivo()) {

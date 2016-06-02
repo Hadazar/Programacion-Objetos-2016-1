@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package vista;
 
 import java.awt.BorderLayout;
@@ -17,6 +14,9 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+/*@Héctor Daza
+  @Andrés Iriarte
+*/
 public class Tablero extends JFrame {
 
     private PanelDibujar panelControl;
